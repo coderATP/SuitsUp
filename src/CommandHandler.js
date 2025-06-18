@@ -1,3 +1,5 @@
+import { PlayerMovement } from "./movements/PlayerMovement.js"
+
 export class CommandHandler{
     constructor(scene){
         this.scene = scene;
@@ -22,12 +24,12 @@ export class CommandHandler{
 
         if(!command) return;
         console.log (command.id)
-        if(command.id === "playerMove"){
-           // new PlayerMovement(this.scene, null, null).undo();
+        if(command.id === "playerMovement"){
+            new PlayerMovement(this.scene, null, null).undo(command);
             this.movesToUndo--;
         }
 
-        else if(command.id === "opponentMove"){
+        else if(command.id === "opponentMovement"){
            // new OpponentMovement(this.scene, null, null).undo();
             this.movesToUndo--;
         } 
