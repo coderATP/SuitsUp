@@ -70,23 +70,14 @@ export class PreloadScene extends BaseScene{
         this.load.on("complete", ()=>{
             //load animations (this has to wait till now since it requires textures to first load)
             //load animations here
-            this.loadingText.setText("Click anywhere to continue");
+            this.loadingText.setText("tap anywhere to continue");
             this.loadingText.setPosition(this.config.width/2 - this.loadingText.width/2, this.config.height/2 - this.loadingText.height/2);
 
             this.loadingText2.destroy();
-            this.input.once("pointerdown", ()=>{ this.scene.start("MenuScene")});
+            this.input.once("pointerdown", ()=>{ this.scene.start("MenuScene"); });
         })
         this.loadFiles(); 
 
-    }
-    toggleFullscreen(){
-       if(!document.fullscreenElement){
-           document.documentElement.requestFullscreen();
-            screen.orientation.lock("portrait");
-        }else if(document.exitFullscreen){
-            document.exitFullscreen();
-            screen.orientation.lock("portrait"); 
-        }
     }
     
 }
