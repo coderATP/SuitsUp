@@ -32,7 +32,13 @@ export class TableSelectionScene extends BaseScene{
             eventEmitter.emit("ToMenu");
         })
         eventEmitter.once("ToPlay", ()=>{
-            this.registry.set("numberOfOpponents", 4);
+            const form = document.getElementById("participants");
+            
+            Object.values(form.children).forEach(child=>{
+                if(child.checked) this.checkedElement = child;
+            })
+            
+            this.registry.set("numberOfOpponents", parseInt(this.checkedElement.value));
             this.scene.start("PlayScene");  
         })
         eventEmitter.once("ToMenu", ()=>{

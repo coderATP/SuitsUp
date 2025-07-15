@@ -1,6 +1,5 @@
 import { Movement } from "./Movement.js";
 import { CommandHandler } from "../CommandHandler.js";
-import { Enemy1Movement } from "./OpponentMovement.js";
 import { FoundationMovement } from "./FoundationMovement.js";
 import { MarketMovement } from "./MarketMovement.js";
 
@@ -132,7 +131,7 @@ export class PlayerMovement extends Movement{
                     playerPileTopmostCard.once("pointerdown", ()=>{ this.execute() })
                 }
                 else this.execute();    
-            }, 1000)
+            }, 1100)
         }
         else{
             if(nextPileToDeal.id === "player"){

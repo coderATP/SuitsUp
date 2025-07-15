@@ -45,11 +45,11 @@ div#playScreenTop{
 div#playScreenTop table{
     position: absolute;
     max-width: 80%;
-   /* width: 100%;
-    height: 100%;*/
     background-color: white;
     left: 50%;
     transform: translate(-50%);
+    margin-left: 15px;
+    font-size: 0.8rem;
 }
 div#playScreenTop table tr{
     border: 2px solid black;
@@ -74,11 +74,11 @@ div#tableSelectionScreen{
 }
 div#tableSelectionScreen label {
     font-family: myFont;
-    font-size: 1rem;
+    font-size: 0.85rem;
     color: blueviolet;
 }
 div#tableSelectionScreen div#participants {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -93,20 +93,20 @@ div#tableSelectionScreen div#buttons{
 }
 
 div#tableSelectionScreen button{
-    font-size: 2rem;
-    border: 2px solid blueviolet;
+    font-size: 1.7rem;
+    border: 1px solid blueviolet;
     color: white;
 }
 div#tableSelectionScreen button#back{
     position: absolute;
     right: 1%;
-    bottom: 5%;
+    bottom: 2%;
     background-color: red;
 }
 div#tableSelectionScreen button#ok{
     position: absolute;
     left: 1%;
-    bottom: 5%;
+    bottom: 2%;
     background-color: blue;
 }
 form{

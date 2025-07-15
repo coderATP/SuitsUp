@@ -24,7 +24,7 @@ export class CommandHandler{
         const command = this.moves.pop();
 
         if(!command) return;
-        console.log (command.id)
+        
         if(command.id === "playerMovement"){
             new PlayerMovement(this.scene, null, null).undo(command);
             this.movesToUndo--;

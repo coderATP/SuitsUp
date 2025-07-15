@@ -24,7 +24,7 @@ export class FoundationMovement extends Movement{
                 onComplete: ()=>{
                     const card = this.scene.createCard(targetPile.id+"Card", originalCard.getData("x"), originalCard.getData("y"))
                         .setInteractive({draggable: false})
-                        .setFrame(originalCard.getData("frame"))
+                        .setFrame(52)
                     card.setData({
                         x: card.x,
                         y: card.y,
@@ -39,6 +39,8 @@ export class FoundationMovement extends Movement{
                     targetPile.container.list.forEach((card, i)=>{
                         card.setPosition(-i, -i*2)
                         card.setData({x: card.x, y: card.y})
+                        if(targetPile.id === "player") card.setFrame(card.getData("frame"))
+                        
                     })
                     //destroy original card
                     originalCard.destroy();
