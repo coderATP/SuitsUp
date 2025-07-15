@@ -1,4 +1,4 @@
-# elewe-n-jewe
+# SuitsUp!
 ## play demo at https://atp-suitup.netlify.app
 Popularly called eléwé-ń-jewé among the Yoruba people, SuitsUp! is a multiplayer(2-4 opponents), turn-based card game in which you win opponent(s) by matching suits with the top card on the foundation pile.
 a deck containing 52 cards is used. 10 cards go to each participant, while the remaining cards can be purchased one at a time from the market pile.
