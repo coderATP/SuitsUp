@@ -5,14 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport"
         content="width=device-width, initial-scale=1">
-    <title>ATANDA-SOLITAIRE</title>
+    <title>ELÉWÉ-Ń-JEWÉ</title>
     <link rel="stylesheet" href="style.css" type="text/css" media="all" />
 </head>
 
 <body>
     
     <div id="gameWrapper">
-        
+        <div id="playScreen">
+            <div id="playScreenTop">
+            </div>
+            <div id="playScreenBottom"> 
+            </div>
+        </div>
+        <div id="menuScreen">
+            
+        </div>
+        <div id="tableSelectionScreen">
+            <form action="">
+                <label for="">Select Number of Participants</label>
+                <div id="participants">
+                    <input type="radio" name = "participant" value = "2"> <i>Two</i> 
+                    <input type="radio" name = "participant" value = "3"> <i>Three</i>
+                    <input type="radio" name = "participant" value = "4" checked> <i>Four</i>
+                </div>
+            </form>
+            <div id="buttons">
+                <button id = "ok">SUBMIT</button>
+                <button id = "back">BACK</button>  
+            </div>
+
+        </div>
     </div>
     <script src="lib/phaser_v87/phaser.min.js"></script>
     <script type = "module" src="script.js">script.js</script>

@@ -2,7 +2,7 @@ import { BaseScene } from "./BaseScene.js";
 //command handler for card movements
 import { CommandHandler } from "../CommandHandler.js";
 //movements
-import { PlayerMovement } from "../movements/PlayerMovement.js"
+import { PlayerMovement } from "../movements/PlayerMovement.js";
 import { EleweNJewe } from "../Elewe-n-Jewe.js";
 
 
@@ -15,6 +15,10 @@ export class PlayScene extends BaseScene{
  
     }
     
+    showInterface(){
+        this.hideAllScreens();
+        this.showOne(this.playScreen, "grid", -1);
+    }
     createCard(type, x, y){
         const card =  this.add.image(x,y,"cards").setName(type).setOrigin(0).setScale(this.config.zoomFactor);
         return card
@@ -78,25 +82,17 @@ export class PlayScene extends BaseScene{
             //return if click on empty space
             if(!gameobject[0]) return;
             if(gameobject[0].name === "playerCard"){
+                if(this.commandHandler.playing) return;
+               // alert ("player bout to deal")
                 const command = new PlayerMovement(this, gameobject[0]);
                 this.commandHandler.execute(command);
-            }
-            else if(gameobject[0].name === "drawPileZone"){
-            }
-            else if(gameobject[0].name === "undoButton"){
-                this.commandHandler.undo();
             }
         })
         return this;
     }
     
     create(){
-        //buttons
-        this.undoButton = this.add.text(0,0, "undo",
-            {font: "30px Arial"})
-            .setOrigin(0)
-            .setInteractive()
-            .setName("undoButton");
+        this.showInterface();
         //graphics creation
         this.graphics = this.add.graphics({lineStyle:  {width: 1, color: "0xffffff"} })
         //game

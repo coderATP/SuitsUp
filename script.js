@@ -1,10 +1,14 @@
+import { ManufacturerScene } from "./src/scenes/ManufacturerScene.js";
 import { PreloadScene } from "./src/scenes/PreloadScene.js";
+import { MenuScene } from "./src/scenes/MenuScene.js";
+import { TableSelectionScene } from "./src/scenes/TableSelectionScene.js";
+
 import { PlayScene } from "./src/scenes/PlayScene.js";
 
 
 const GAME_WIDTH = innerWidth;
 const GAME_HEIGHT = innerHeight;
-const ZOOM_FACTOR = 1.38
+const ZOOM_FACTOR = 0.5
 
 
 const SHARED_CONFIG = {
@@ -30,7 +34,8 @@ const config= {
     type: Phaser.AUTO,
     ...SHARED_CONFIG, 
     parent: "gameWrapper",
-    backgroundColor: 0x00aa00,
+    backgroundColor: 0x005500,
+    transparent: true,
     scale: {
          mode: Phaser.Scale.Fit,
          autoCenter: Phaser.Scale.CENTER_BOTH,
@@ -47,7 +52,10 @@ const config= {
 
     },
     scene: [
+        new ManufacturerScene(SHARED_CONFIG),
         new PreloadScene(SHARED_CONFIG),
+        new MenuScene(SHARED_CONFIG),
+        new TableSelectionScene(SHARED_CONFIG),
         new PlayScene(SHARED_CONFIG) ],
 };
 

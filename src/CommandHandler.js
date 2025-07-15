@@ -1,4 +1,4 @@
-import { PlayerMovement } from "./movements/PlayerMovement.js"
+//import { PlayerMovement } from "./movements/PlayerMovement.js"
 
 export class CommandHandler{
     constructor(scene){
@@ -8,10 +8,11 @@ export class CommandHandler{
         this.totalMoves = 0;
         this.movesToRedo = 0;
         this.movesToUndo = 0;
+        this.playing = false;
     }
     
     execute(command){
-        
+       this.playing = true;
         command.execute();
         this.moves.push(command);
         this.movesToUndo++;

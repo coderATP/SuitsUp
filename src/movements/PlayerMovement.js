@@ -1,77 +1,147 @@
 import { Movement } from "./Movement.js";
+import { CommandHandler } from "../CommandHandler.js";
+import { Enemy1Movement } from "./OpponentMovement.js";
+import { FoundationMovement } from "./FoundationMovement.js";
+import { MarketMovement } from "./MarketMovement.js";
 
 export class PlayerMovement extends Movement{
     constructor(scene, card){
         super(scene, card);
         this.id = "playerMovement";
+        this.targetX = 0;
+        this.targetY = -200;
+        this.table = this.scene.elewenjewe.table;
+        this.lastIndexToDeal = -1;
+        this.scene = scene;
+        this.tempParticipants = this.table.participants.slice();
+ 
+    }
+    
+    determineEndOfRoundScore(data, winnerPile){
+        const score = this.table.foundationPile.container.length;
+        const winner = winnerPile.id;
+        data.forEach(cell=>{
+            if(cell.id === winnerPile.id){
+                cell.innerHTML = parseInt(cell.innerHTML) + score;
+            }
+        })
+        return {winner, score};
     }
     
     execute(){
-        const sourcePile = this.scene.elewenjewe.playerPile.container;
-        const targetPile = this.scene.elewenjewe.foundationPile.container;
-       targetPile.setDepth(1); sourcePile.setDepth(0); 
- 
-        this.scene.tweens.add({
-            targets: this.card,
-            y: -200,
-            x: 0,
-            onComplete: ()=>{
-                const card = this.scene.createCard("foundationCard")
-                    .setInteractive({draggable: false})
-                    .setFrame(this.card.getData("frame"));
-                card.setData({
-                    frame: this.card.getData("frame"),
-                    suit: this.card.getData("suit"),
-                    colour: this.card.getData("colour"),
-                    value: this.card.getData("value")
-                });
-                
-                targetPile.add(card);
-                targetPile.list.forEach((card, i)=>{
-                    card.setPosition(i*2, -i)
-                })
-                
-                this.originalCardData = {
-                    x: this.card.x,
-                    y: this.card.y,
-                    cardIndex: sourcePile.length,
-                    frame: this.card.getData("frame"),
-                    value: this.card.getData("value"),
-                    suit: this.card.getData("suit"),
-                    colour: this.card.getData("colour"), 
-                } 
-                sourcePile.list.pop();
-            }
-        })
-    }
-    
-    undo(command){
-        if(!command.originalCardData) return;
-        const sourcePile = this.scene.elewenjewe.foundationPile.container;
-        const targetPile = this.scene.elewenjewe.playerPile.container;
-       targetPile.setDepth(1); sourcePile.setDepth(0); 
- 
-        const card = sourcePile.list[sourcePile.length-1];
+        //A RECURSIVE FUNCTION: keeps calling itself
+        this.scene.commandHandler.playing = true;
+        this.lastIndexToDeal++;
         
-        this.scene.tweens.add({
-            targets: card,
-            y: 200 - (2*targetPile.length),
-            x: -targetPile.length,
+        const targetPile = this.table.foundationPile;
+        let sourcePile = this.tempParticipants[this.lastIndexToDeal];
+
+        //access indicator
+        const indicator = this.table.playerPile.dealerIndicator;
+        indicator.moveToNextDealer(sourcePile);
+        
+        //REVEAL CARD OF PARTICIPANT ONLY WHEN IT'S TIME TO DEAL
+        const topCard = sourcePile.container.list[sourcePile.container.length-1];
+        if(topCard) topCard.setFrame(topCard.getData("frame"));
+        
+        if(sourcePile) this.card = sourcePile.container.list[sourcePile.container.length - 1];
+        
+        targetPile.container.setDepth(0);
+        if(sourcePile) sourcePile.container.setDepth(1);
+
+        const tween = this.scene.tweens.add({
+            targets: this.card,
+            x: targetPile.x - sourcePile.x,
+            y: targetPile.y - sourcePile.y,
+            duration: 1000,
+            ease: "Quadratic",
             onComplete: ()=>{
-                const card = this.scene.createCard("playerCard")
-                    .setInteractive({draggable: false})
-                    .setPosition(-targetPile.length, -2*targetPile.length)
-                    .setFrame(command.originalCardData.frame);
+                //create new card
+                const card = this.scene.createCard("foundationCard")
+                        .setInteractive({draggable: false})
+                        .setFrame(this.card.getData("frame"));
                 card.setData({
-                    frame: command.originalCardData.frame,
-                    suit: command.originalCardData.suit,
-                    colour: command.originalCardData.colour,
-                    value: command.originalCardData.value
+                        x: card.x,
+                        y: card.y,
+                        id: targetPile.id,
+                        sourceID: sourcePile.id,
+                        frame: this.card.getData("frame"),
+                        suit: this.card.getData("suit"),
+                        colour: this.card.getData("colour"),
+                        value: this.card.getData("value")
                 });
-                
-                targetPile.add(card);
-                sourcePile.list.pop();
+                //add new card to target pile
+                targetPile.container.add(card);
+                //set position of new card
+                targetPile.container.list.forEach((card, i)=>{
+                        card.setPosition(0, -i*2)
+                        card.setData({x: card.x, y: card.y})
+                })
+                sourcePile.container.list.pop();
+                  
+                //NEXT MOVE
+                //OPTION A: SOMEONE WINS
+                const cardBelow = targetPile.container.list[targetPile.container.length-1];
+                const cardTop = targetPile.container.list[targetPile.container.length-2];
+                if(targetPile.container.length > 1 &&
+                        cardTop.getData("suit") === cardBelow.getData("suit") 
+                ){
+                    //update scoreboard
+                    const winnerScore = this.determineEndOfRoundScore(this.scene.elewenjewe.data, sourcePile);
+                    
+                    // alert("winner: "+sourcePile.id);
+                    const arr = this.tempParticipants.splice(0, this.lastIndexToDeal);
+                    this.tempParticipants.push(...arr);
+                        
+                    const command = new FoundationMovement(this.scene, sourcePile);
+                    this.scene.commandHandler.execute(command);
+
+                    setTimeout(()=>{
+                            this.lastIndexToDeal = -1; 
+                            this.execute();
+                    }, 1200);
+                }
+                //OPTION B: NOBODY WINS
+                else{
+                    this.continueDealing();
+                }
             }
         }) 
     }
+    
+    resetDealerIndexIfNobodyWins(){
+        if(this.lastIndexToDeal >= this.table.participants.length-1){
+            this.lastIndexToDeal = -1;
+        } 
+    }
+    continueDealing(){
+        //first player deals again if nobody wins 
+        this.resetDealerIndexIfNobodyWins();
+        let nextPileToDeal = this.tempParticipants[this.lastIndexToDeal+1];
+        //but first check if next pile is empty
+        //if empty, move a card from market to it,
+        //then resume executing/dealing
+        if(nextPileToDeal.container.length === 0){
+            //deal from market
+            const command = new MarketMovement(this.scene, nextPileToDeal);
+            this.scene.commandHandler.execute(command);
+            //wait (for 1 sec) till card arrives from market, then deal
+            setTimeout(()=>{
+                if(nextPileToDeal.id === "player"){
+                    const playerPileTopmostCard = this.table.playerPile.container.list[this.table.playerPile.container.list.length - 1];
+                    playerPileTopmostCard.once("pointerdown", ()=>{ this.execute() })
+                }
+                else this.execute();    
+            }, 1000)
+        }
+        else{
+            if(nextPileToDeal.id === "player"){
+                const playerPileTopmostCard = this.table.playerPile.container.list[this.table.playerPile.container.list.length - 1];
+                playerPileTopmostCard.once("pointerdown", ()=>{ this.execute() })
+            }
+            else this.execute();   
+        }
+
+    }
+    
 } 
