@@ -21,17 +21,19 @@ export class TableSelectionScene extends BaseScene{
         this.showOne(this.tableSelectionScreen, "grid", 0);
     }
     create(){
+        const { MenuScene } = this.game.scene.keys;
+        MenuScene.clicked = true;
         this.showInterface();
         // this.audio = new AudioControl(this);
         this.submitBtn = document.getElementById("ok");
         this.backBtn = document.getElementById("back");
         this.submitBtn.addEventListener("click", ()=>{
-            eventEmitter.emit("ToPlay");
+            eventEmitter.emit("TableSelectionToPlay");
         }) 
         this.backBtn.addEventListener("click", ()=>{
-            eventEmitter.emit("ToMenu");
+            eventEmitter.emit("TableSelectionToMenu");
         })
-        eventEmitter.once("ToPlay", ()=>{
+        eventEmitter.once("TableSelectionToPlay", ()=>{
             const form = document.getElementById("participants");
             
             Object.values(form.children).forEach(child=>{
@@ -39,10 +41,10 @@ export class TableSelectionScene extends BaseScene{
             })
             
             this.registry.set("numberOfOpponents", parseInt(this.checkedElement.value));
-            this.scene.start("PlayScene");  
+            this.scene.start("PlayScene");
         })
-        eventEmitter.once("ToMenu", ()=>{
-            this.scene.start("MenuScene");  
+        eventEmitter.once("TableSelectionToMenu", ()=>{
+            this.scene.start("MenuScene");
         }) 
     }
 }

@@ -6,9 +6,11 @@ export class MenuScene extends BaseScene{
     constructor(config){
         super("MenuScene", config);
         this.config = config;
+        this.clicked = true;
     }
     
     showInterface(){
+        eventEmitter.destroy("TableSelectionToMenu")
       /*  const { PlayScene } = this.game.scene.keys;
         eventEmitter.destroy("ConfirmToTitle"); 
         eventEmitter.destroy("GameCompleteToMenu");
@@ -47,7 +49,7 @@ export class MenuScene extends BaseScene{
             eventEmitter.emit("MenuToSettings");
         })
         eventEmitter.once("MenuToPlay", ()=>{
-            this.scene.start("TableSelectionScene");  
+            this.scene.start("TableSelectionScene");
         })
         this.tweens.add({
             targets: this.startBtn,

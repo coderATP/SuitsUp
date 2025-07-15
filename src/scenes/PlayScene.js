@@ -4,6 +4,7 @@ import { CommandHandler } from "../CommandHandler.js";
 //movements
 import { PlayerMovement } from "../movements/PlayerMovement.js";
 import { EleweNJewe } from "../Elewe-n-Jewe.js";
+import { eventEmitter } from "../events/EventEmitter.js";
 
 
 export class PlayScene extends BaseScene{
@@ -16,6 +17,7 @@ export class PlayScene extends BaseScene{
     }
     
     showInterface(){
+        eventEmitter.destroy("TableSelectionToPlay");
         this.hideAllScreens();
         this.showOne(this.playScreen, "grid", -1);
     }
