@@ -83,7 +83,7 @@ export class PlayScene extends BaseScene{
         this.input.on("pointerdown", (pointer, gameobject)=>{
             //return if click on empty space
             if(!gameobject[0]) return;
-            if(gameobject[0].name === "playerCard"){
+            if(gameobject[0].name === "PlayerCard"){
                 if(this.commandHandler.playing) return;
                // alert ("player bout to deal")
                 const command = new PlayerMovement(this, gameobject[0]);
@@ -93,8 +93,20 @@ export class PlayScene extends BaseScene{
         return this;
     }
     
+    shuffle(array){
+        let tempDeck = [];
+        while(array.length){
+            const randomPos = Math.floor(Math.random() * array.length);
+            const randomCard = (array.splice(randomPos, 1))[0];
+            tempDeck.push(randomCard);
+        }
+        array = tempDeck;
+        tempDeck = [];
+        return array;
+    }
     create(){
         this.showInterface();
+        
         //graphics creation
         this.graphics = this.add.graphics({lineStyle:  {width: 1, color: "0xffffff"} })
         //game

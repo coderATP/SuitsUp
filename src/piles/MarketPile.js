@@ -1,6 +1,7 @@
 export class MarketPile{
     constructor(scene, id){
         this.scene = scene;
+        this.config = scene.config;
         this.id = id;
         this.container = undefined;
     }
@@ -15,8 +16,8 @@ export class MarketPile{
        //drop zone
        this.zone = this.scene.createDropZone("foundationZone", x,y,w,h);
        //name
-       this.name = this.scene.add.text(0,0, this.id, { fontSize: "16px", fontFamily: "myOtherFont"}).setOrigin(0)
-       this.name.setPosition(x + w/2 -this.name.width/2, y+h); 
+       this.name = this.scene.add.text(0,0, this.id, { fontSize: "14px", fontFamily: "myOtherFont", color: "black"}).setOrigin(0).setScale(1)
+       this.name.setPosition(x + w/2 -this.name.width/2, y+h-2);
        //container
        this.container = this.scene.add.container(x,y);
        return this; 

@@ -1,5 +1,8 @@
 import { PlayerPile } from "../piles/PlayerPile.js";
 import { EnemyPile } from "../piles/EnemyPile.js";
+import { FoundationPile } from "../piles/FoundationPile.js";
+import { MarketPile } from "../piles/MarketPile.js";
+
 
 import { HUD } from "../hud/Hud.js";
 
@@ -9,6 +12,9 @@ export class Table{
         this.config = scene.config;
         this.graphics = scene.graphics;
         this.participants = [];
+        //enemy random names
+        this.enemyNames = ["Bayo", "Ade", "Sola", "Billy", "Dele", "Wale"]
+        this.enemyNames = scene.shuffle(this.enemyNames);
         
         this.cardWidth = this.scene.elewenjewe.deck[0].displayWidth;
         this.cardHeight = this.scene.elewenjewe.deck[0].displayHeight;
@@ -36,6 +42,9 @@ export class Table{
             this.containerRect.height,
             this.radius
         );
+        //piles
+        this.foundationPile = new FoundationPile(scene, "foundation");
+        this.marketPile = new MarketPile(scene, "Market");
         //HUD
         this.hud = new HUD(this.scene);
     }
@@ -58,6 +67,23 @@ export class Table{
         
         return this;
     }*/
+    create(){
+        //create market pile
+        const playScreenRect = this.scene.playScreenTopUI.getBoundingClientRect();
+        this.marketPile.create(
+            playScreenRect.x+3,
+            playScreenRect.y,
+            this.cardWidth,
+            this.cardHeight
+        );
+        //create foundation pile 
+        this.foundationPile.create(
+            this.centerX - this.cardWidth/2,
+            this.centreY - this.cardHeight/2,
+            this.cardWidth,
+            this.cardHeight
+        );
+    }
     addCardToPiles(participantsArray, market){
         const tempDeck = this.scene.elewenjewe.deck;
         for(let i = participantsArray.length; i > 0; --i){

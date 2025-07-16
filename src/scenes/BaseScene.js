@@ -1,3 +1,5 @@
+import { UIEventsHandler } from "../events/UIEventsHandler.js";
+
 export class BaseScene extends Phaser.Scene{
     constructor(scene){
         super(scene);
@@ -7,6 +9,8 @@ export class BaseScene extends Phaser.Scene{
         this.menuScreen = document.getElementById("menuScreen");
         this.tableSelectionScreen = document.getElementById("tableSelectionScreen");
         this.playScreen = document.getElementById("playScreen");
+        this.ui = new UIEventsHandler(scene);
+        
         this.playScreenTopUI = document.getElementById("playScreenTop");
         this.playScreenBottomUI = document.getElementById("playScreenBottom");
         

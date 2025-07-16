@@ -25,12 +25,10 @@ export class TableSelectionScene extends BaseScene{
         MenuScene.clicked = true;
         this.showInterface();
         // this.audio = new AudioControl(this);
-        this.submitBtn = document.getElementById("ok");
-        this.backBtn = document.getElementById("back");
-        this.submitBtn.addEventListener("click", ()=>{
+        this.ui.tableSelection_submitBtn.addEventListener("click", ()=>{
             eventEmitter.emit("TableSelectionToPlay");
         }) 
-        this.backBtn.addEventListener("click", ()=>{
+        this.ui.tableSelection_backBtn.addEventListener("click", ()=>{
             eventEmitter.emit("TableSelectionToMenu");
         })
         eventEmitter.once("TableSelectionToPlay", ()=>{

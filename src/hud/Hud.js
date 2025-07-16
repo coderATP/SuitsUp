@@ -1,7 +1,7 @@
 export class HUD{
     constructor(scene){
         this.scene = scene;
-        this.playScreenTopUI = document.getElementById("playScreenTop");
+        this.playScreenTable = document.getElementById("table");
         this.playScreenBottomUI = document.getElementById("playScreenBottom");
         this.table = undefined;
         this.rounds = 0;
@@ -28,7 +28,7 @@ export class HUD{
             th.innerText = participants[i].id;
             trHeader.appendChild(th);
         }
-        this.playScreenTopUI.appendChild(this.table);
+        this.playScreenTable.appendChild(this.table);
         return this.table;
     }
     addRowToScoreboard(scoreboard){

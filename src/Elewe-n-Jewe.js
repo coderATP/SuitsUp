@@ -22,8 +22,6 @@ export class EleweNJewe{
     constructor(scene){
         this.scene = scene;
         this.config = scene.config;
-       // this.playerPile = new PlayerPile(scene, "Peter");
-       // this.foundationPile = new FoundationPile(this.scene);
         this.opponentPiles = [];
         this.deck = [];
     }
@@ -45,19 +43,6 @@ export class EleweNJewe{
                this.deck.push(card);
             }
         }
-        return this.deck;
-    }
-    
-    shuffleDeck(){
-        //shuffle card deck
-        let tempDeck = [];
-        while(this.deck.length){
-            const randomPos = Math.floor(Math.random() * this.deck.length);
-            const randomCard = (this.deck.splice(randomPos, 1))[0];
-            tempDeck.push(randomCard);
-        }
-        this.deck = tempDeck;
-        tempDeck = [];
         return this.deck;
     }
     
@@ -92,7 +77,7 @@ export class EleweNJewe{
     
     newGame(){
         this.createDeck();
-        this.shuffleDeck();
+        setTimeout(()=>{this.scene.shuffle(this.deck);},50)
         this.table = this.createTable();
         this.rows = [];
         this.row = this.table.hud.addRowToScoreboard(this.table.scoreboard);

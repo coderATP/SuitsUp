@@ -7,21 +7,47 @@
         content="width=device-width, initial-scale=1">
     <title>ELÉWÉ-Ń-J'EWÉ</title>
     <link rel="stylesheet" href="style.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="styles/Menu.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="styles/TableSelection.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="styles/Play.css" type="text/css" media="all" />
 </head>
 
 <body>
     
     <div id="gameWrapper">
-        <div id="playScreen">
+        <section id="playScreen">
             <div id="playScreenTop">
+                <div id="table">
+                </div>
+                <div id="others">
+                    <div id="time">
+                        <img id="timeIcon" src="images/time.png" alt="time" />
+                        <p id = "timeText">00:00</p> 
+                    </div>
+                    <div id="pause">
+                        <img id="pauseIcon" src="images/pause.png" alt="pause" />
+                        <p id = "pauseText">Pause</p> 
+                    </div>
+                    <div id="instructions">
+                        <img id="instructionsIcon" src="images/instructions.png" alt="instructions" />
+                        <p id = "instructionsText">About</p> 
+                    </div> 
+                </div>
             </div>
             <div id="playScreenBottom"> 
             </div>
-        </div>
-        <div id="menuScreen">
-            
-        </div>
-        <div id="tableSelectionScreen">
+        </section>
+        <section id="menuScreen">
+            <div id="button">
+                <button id="menu_playBtn">PLAY</button>
+                <button id="menu_continueBtn">CONTINUE</button>
+                <button id="menu_optionsBtn">OPTION</button>   
+                <button id="menu_leaderboardBtn">LEADERBOARD</button>
+                <button id="menu_tutorialBtn">TUTORIAL</button>   
+                <button id="menu_exitBtn">EXIT</button>   
+            </div>
+        </section>
+        <section id="tableSelectionScreen">
             <form action="">
                 <label for="">Select Number of Participants</label>
                 <div id="participants">
@@ -31,11 +57,10 @@
                 </div>
             </form>
             <div id="buttons">
-                <button id = "ok">SUBMIT</button>
-                <button id = "back">BACK</button>  
+                <button id = "tableSelection_submitBtn">SUBMIT</button>
+                <button id = "tableSelection_backBtn">BACK</button>  
             </div>
-
-        </div>
+        </section>
     </div>
     <script src="lib/phaser_v87/phaser.min.js"></script>
     <script type = "module" src="script.js">script.js</script>

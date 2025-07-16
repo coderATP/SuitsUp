@@ -126,7 +126,7 @@ export class PlayerMovement extends Movement{
             this.scene.commandHandler.execute(command);
             //wait (for 1 sec) till card arrives from market, then deal
             setTimeout(()=>{
-                if(nextPileToDeal.id === "player"){
+                if(nextPileToDeal.id === "Player"){
                     const playerPileTopmostCard = this.table.playerPile.container.list[this.table.playerPile.container.list.length - 1];
                     playerPileTopmostCard.once("pointerdown", ()=>{ this.execute() })
                 }
@@ -134,7 +134,7 @@ export class PlayerMovement extends Movement{
             }, 1100)
         }
         else{
-            if(nextPileToDeal.id === "player"){
+            if(nextPileToDeal.id === "Player"){
                 const playerPileTopmostCard = this.table.playerPile.container.list[this.table.playerPile.container.list.length - 1];
                 playerPileTopmostCard.once("pointerdown", ()=>{ this.execute() })
             }
