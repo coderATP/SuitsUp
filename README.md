@@ -32,8 +32,8 @@ There will be five difficulty modes:
 
 There will be three options to choose from:
 * Classic
-*     this is how the game is originally played
+    this is how the game is originally played
 * Race Against Time
-*     player with the highest score after a specified timeframe wins
+    player with the highest score after a specified timeframe wins
 * First to 70
-*     game ends when one of the players score 70 points
+    game ends when one of the players score 70 points
