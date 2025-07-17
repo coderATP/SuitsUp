@@ -11,7 +11,7 @@ export class UIEventsHandler{
         this.hintIcon = document.getElementById("hint");
         this.movesIcon = document.getElementById("moves");
         this.timeIcon = document.getElementById("time");
-
+        this.marketSection = document.getElementById("marketSection");
         this.playSceneIcons = [this.undoIcon, this.redoIcon, this.instructionsIcon, this.settingsIcon, this.leaderboardIcon, this.hintIcon, this.pauseIcon];
         
         //texts

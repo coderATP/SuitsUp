@@ -7,6 +7,10 @@
     font-family: myOtherFont;
     src: url("fonts/Planes_ValMore.ttf");
 }
+:root{
+    --hue: 200;
+}
+
 *{
     font-family: myFont;
     box-sizing: border-box;

@@ -20,6 +20,17 @@ export class TableSelectionScene extends BaseScene{
         this.hideAllScreens();
         this.showOne(this.tableSelectionScreen, "grid", 0);
     }
+    /*restricted*/
+    getCheckedRadioElementFromGrandParentDiv(div){
+        const grandparentDiv = document.getElementById(div);
+        let checkedRadioElement = undefined;
+        Object.values(grandparentDiv.children).forEach(parentDiv=>{
+            Object.values(parentDiv.children).forEach(radioInput=>{
+                if(radioInput.checked) checkedRadioElement = radioInput; 
+            })
+        })
+        return checkedRadioElement;
+    }
     create(){
         const { MenuScene } = this.game.scene.keys;
         MenuScene.clicked = true;
@@ -32,13 +43,8 @@ export class TableSelectionScene extends BaseScene{
             eventEmitter.emit("TableSelectionToMenu");
         })
         eventEmitter.once("TableSelectionToPlay", ()=>{
-            const form = document.getElementById("participants");
-            
-            Object.values(form.children).forEach(child=>{
-                if(child.checked) this.checkedElement = child;
-            })
-            
-            this.registry.set("numberOfOpponents", parseInt(this.checkedElement.value));
+            const numberOfOpponents = this.getCheckedRadioElementFromGrandParentDiv("participants").value;
+            this.registry.set("numberOfOpponents", parseInt(numberOfOpponents));
             this.scene.start("PlayScene");
         })
         eventEmitter.once("TableSelectionToMenu", ()=>{

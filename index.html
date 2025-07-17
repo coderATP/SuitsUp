@@ -17,20 +17,25 @@
     <div id="gameWrapper">
         <section id="playScreen">
             <div id="playScreenTop">
-                <div id="table">
+                <div id="marketSection">
+                    
                 </div>
-                <div id="others">
-                    <div id="time">
-                        <img id="timeIcon" src="images/time.png" alt="time" />
-                        <p id = "timeText">00:00</p> 
+                <div id="uiSection">
+                    <div id="table">
                     </div>
-                    <div id="pause">
-                        <img id="pauseIcon" src="images/pause.png" alt="pause" />
-                        <p id = "pauseText">Pause</p> 
-                    </div>
-                    <div id="instructions">
-                        <img id="instructionsIcon" src="images/instructions.png" alt="instructions" />
-                        <p id = "instructionsText">About</p> 
+                    <div id="others">
+                        <div id="time">
+                            <img id="timeIcon" src="images/time.png" alt="time" />
+                            <p id = "timeText">00:00</p> 
+                        </div>
+                        <div id="pause">
+                            <img id="pauseIcon" src="images/pause.png" alt="pause" />
+                            <p id = "pauseText">Pause</p> 
+                        </div>
+                        <div id="instructions">
+                            <img id="instructionsIcon" src="images/instructions.png" alt="instructions" />
+                            <p id = "instructionsText">About</p> 
+                        </div> 
                     </div> 
                 </div>
             </div>
@@ -48,15 +53,45 @@
             </div>
         </section>
         <section id="tableSelectionScreen">
-            <form action="">
-                <label for="">Select Number of Participants</label>
-                <div id="participants">
-                    <input type="radio" name = "participant" value = "2"> <i>Two</i> 
-                    <input type="radio" name = "participant" value = "3"> <i>Three</i>
-                    <input type="radio" name = "participant" value = "4" checked> <i>Four</i>
+            <div id = "participantsSection">
+                <div id="label">
+                    <label for="">Select Number of Participants</label> 
                 </div>
-            </form>
-            <div id="buttons">
+                <div id="participants">
+                    <div id="twoParticipants">
+                        <input type="radio" name = "participant" value = "2"> <i>Two</i>   
+                    </div>
+                    <div id="threeParticipants">
+                        <input type="radio" name = "participant" value = "3" checked> <i>Three</i>   
+                    </div>
+                    <div id="fourParticipants">
+                        <input type="radio" name = "participant" value = "4"> <i>Four</i>   
+                    </div>
+                </div>
+            </div>
+            <div id = "difficultiesSection">
+                <div id="label">
+                    <label for="">Difficulty</label> 
+                </div>
+                <div id="difficulties">
+                    <div id="easy">
+                        <input type="radio" name = "difficulty" value = "easy" checked> <i>Easy</i>  
+                    </div>
+                    <div id="normal">
+                        <input type="radio" name = "difficulty" value = "normal"> <i>Normal</i>  
+                    </div>
+                    <div id="hard">
+                        <input type="radio" name = "difficulty" value = "hard"> <i>Hard</i>  
+                    </div>
+                    <div id="legend">
+                        <input type="radio" name = "difficulty" value = "legend"> <i>Legend</i>  
+                    </div>
+                    <div id="hell">
+                        <input type="radio" name = "difficulty" value = "hell"> <i>Hell</i>  
+                    </div>
+                </div>
+            </div> 
+            <div id="buttonsSection">
                 <button id = "tableSelection_submitBtn">SUBMIT</button>
                 <button id = "tableSelection_backBtn">BACK</button>  
             </div>

@@ -34,7 +34,7 @@ export class Table{
         this.centerX = (this.containerRect.left + this.containerRect.right)/2;
         this.centreY = (this.containerRect.top + this.containerRect.bottom)/2; 
         
-        this.graphics.fillStyle(0x00ff00, 2)
+        this.graphics.fillStyle(0x007700, 2)
         this.graphics.fillRoundedRect(
             this.containerRect.x,
             this.containerRect.y,
@@ -69,10 +69,11 @@ export class Table{
     }*/
     create(){
         //create market pile
-        const playScreenRect = this.scene.playScreenTopUI.getBoundingClientRect();
+        const marketSection = this.scene.ui.marketSection.getBoundingClientRect();
+        const marketMiddle = marketSection.x + marketSection.width/2;
         this.marketPile.create(
-            playScreenRect.x+3,
-            playScreenRect.y,
+            marketMiddle - this.cardWidth/2,
+            marketSection.y,
             this.cardWidth,
             this.cardHeight
         );
