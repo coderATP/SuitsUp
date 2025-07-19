@@ -152,7 +152,7 @@ export class PlayScene extends BaseScene{
        this.handleDragEvent().handleDropEvent().handleClickEvent();
     }
     
-    swapTwoCards(cardsArray){
+    swapPlayerTopCard(){
         const foundationCardsArray = this.elewenjewe.table.foundationPile.container.list;
         const playerCardsArray = this.elewenjewe.table.playerPile.container.list;
         let foundationTopmostCard = foundationCardsArray[foundationCardsArray.length-1];

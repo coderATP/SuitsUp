@@ -44,7 +44,13 @@ export class TableSelectionScene extends BaseScene{
         })
         eventEmitter.once("TableSelectionToPlay", ()=>{
             const numberOfOpponents = this.getCheckedRadioElementFromGrandParentDiv("participants").value;
+            const difficulty = this.getCheckedRadioElementFromGrandParentDiv("difficulties").value;
+            const gameMode = this.getCheckedRadioElementFromGrandParentDiv("gameModes").value;
+            
             this.registry.set("numberOfOpponents", parseInt(numberOfOpponents));
+            this.registry.set("difficulty", difficulty);
+            this.registry.set("gameMode", gameMode);
+
             this.scene.start("PlayScene");
         })
         eventEmitter.once("TableSelectionToMenu", ()=>{

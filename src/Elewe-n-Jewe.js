@@ -52,8 +52,11 @@ export class EleweNJewe{
     
     createTable(){
         let table;
-        const { TableSelectionScene} = this.scene.game.scene.keys;
+        const { TableSelectionScene } = this.scene.game.scene.keys;
         this.numberOfOpponents = TableSelectionScene.registry.get("numberOfOpponents");
+        this.difficulty = TableSelectionScene.registry.get("difficulty");
+        this.gameMode = TableSelectionScene.registry.get("gameMode");
+
         switch(this.numberOfOpponents){
             case 2:{
                 table = new TableFor2(this.scene).create();

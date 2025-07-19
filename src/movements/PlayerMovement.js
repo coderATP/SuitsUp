@@ -128,11 +128,11 @@ export class PlayerMovement extends Movement{
             setTimeout(()=>{
                 //after arriving from market,
                     if(nextPileToDeal.id === "Player"){
-                    //cheat for easy mode 
-                    const cardToSwap = this.scene.swapTwoCards();
-                     
-                    const playerPileTopmostCard = this.table.playerPile.container.list[this.table.playerPile.container.list.length - 1];
-                    playerPileTopmostCard.once("pointerdown", ()=>{ this.execute() })
+                        //allow (internal) card swapping to favour player
+                        this.swapPlayerCardsBasedOnDifficultyLevel();
+                        const playerPileTopmostCard = this.table.playerPile.container.list[this.table.playerPile.container.list.length - 1];
+                        //allow player to click card before executing
+                        playerPileTopmostCard.once("pointerdown", ()=>{ this.execute() })
                 }
                 else this.execute();    
             }, 1100)
@@ -140,15 +140,43 @@ export class PlayerMovement extends Movement{
         //if not empty, just keep dealing
         else{
             if(nextPileToDeal.id === "Player"){
-                //cheat for easy mode
-                const cardToSwap = this.scene.swapTwoCards();
-                 
+                //allow (internal) card swapping to favour player
+                this.swapPlayerCardsBasedOnDifficultyLevel();
                 const playerPileTopmostCard = this.table.playerPile.container.list[this.table.playerPile.container.list.length - 1];
+                //allow player to click card before executing
                 playerPileTopmostCard.once("pointerdown", ()=>{ this.execute() })
             }
             else this.execute();   
         }
-
     }
     
+    swapPlayerCardsBasedOnDifficultyLevel(){
+        const { elewenjewe } = this.scene;
+        const randomNumber = Math.random();
+        
+        switch(elewenjewe.difficulty){
+            case "easy":{
+                randomNumber < 0.85 && this.scene.swapPlayerTopCard();
+              break;
+            }
+            case "normal":{
+                randomNumber < 0.65 && this.scene.swapPlayerTopCard(); 
+              break;
+            } 
+            case "hard": {
+                randomNumber < 0.45 && this.scene.swapPlayerTopCard();
+                break;
+            }
+            case "legend": {
+                randomNumber < 0.25 && this.scene.swapPlayerTopCard();
+                break;
+            }
+            case "hell": {
+               // randomNumber < 0 && this.scene.swapPlayerTopCard();
+                break;
+            }
+            default: {break;}
+        }
+        
+    }
 } 
