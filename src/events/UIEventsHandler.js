@@ -12,8 +12,12 @@ export class UIEventsHandler{
         this.movesIcon = document.getElementById("moves");
         this.timeIcon = document.getElementById("time");
         this.marketSection = document.getElementById("marketSection");
-        this.playSceneIcons = [this.undoIcon, this.redoIcon, this.instructionsIcon, this.settingsIcon, this.leaderboardIcon, this.hintIcon, this.pauseIcon];
-        
+        this.playSceneIcons = [this.instructionsIcon, this.pauseIcon];
+        //pause
+        this.pause_resumeBtn = document.getElementById("pause_resumeBtn");
+        this.pause_saveBtn = document.getElementById("pause_saveBtn");
+        this.pause_restartBtn = document.getElementById("pause_restartBtn");
+        this.pause_menuBtn = document.getElementById("pause_menuBtn");
         //texts
         this.undoText = document.getElementById("undoText");
         this.redoText = document.getElementById("redoText");

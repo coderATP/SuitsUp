@@ -21,7 +21,7 @@ div#playScreenTop{
     transform: translate(-50%);
     background-color: rgba(0, 255, 0, 0.3);
     overflow: auto;
-    display: flex;
+    display: none;
     justify-content: center;
 }
 div#playScreenBottom{
@@ -35,6 +35,8 @@ div#playScreenBottom{
     transform: translate(-50%);
     background-color: rgba(0, 255, 0, 0.3);
     overflow: auto;
+    display: none;
+    justify-content: center;
 }
 div#playScreenTop div#marketSection{
     position: absolute;

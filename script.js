@@ -2,9 +2,8 @@ import { ManufacturerScene } from "./src/scenes/ManufacturerScene.js";
 import { PreloadScene } from "./src/scenes/PreloadScene.js";
 import { MenuScene } from "./src/scenes/MenuScene.js";
 import { TableSelectionScene } from "./src/scenes/TableSelectionScene.js";
-
 import { PlayScene } from "./src/scenes/PlayScene.js";
-
+import { PauseScene } from "./src/scenes/PauseScene.js";
 
 const GAME_WIDTH = innerWidth;
 const GAME_HEIGHT = innerHeight;
@@ -56,7 +55,8 @@ const config= {
         new PreloadScene(SHARED_CONFIG),
         new MenuScene(SHARED_CONFIG),
         new TableSelectionScene(SHARED_CONFIG),
-        new PlayScene(SHARED_CONFIG) ],
+        new PlayScene(SHARED_CONFIG),
+        new PauseScene(SHARED_CONFIG) ],
 };
 
 new Phaser.Game(config);

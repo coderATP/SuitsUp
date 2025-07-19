@@ -24,8 +24,8 @@ export class TableFor2 extends Table{
         this.participants.push(this.playerPile, this.enemy1Pile);
         //create scoreboard
         this.scoreboard = this.hud.createScoreboard(this.participants);
-        this.addCardToPiles(this.participants, this.marketPile);
         super.create();
+        this.addCardToPiles(this.participants, this.marketPile);
         return this;
     }
 

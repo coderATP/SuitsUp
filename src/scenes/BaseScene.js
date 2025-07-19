@@ -11,10 +11,13 @@ export class BaseScene extends Phaser.Scene{
         this.playScreen = document.getElementById("playScreen");
         this.ui = new UIEventsHandler(scene);
         
+        this.pauseScreen = document.getElementById("pauseScreen");
+        this.confirmScreen = document.getElementById("confirmScreen");
         this.playScreenTopUI = document.getElementById("playScreenTop");
         this.playScreenBottomUI = document.getElementById("playScreenBottom");
-        
-        this.screens = [this.menuScreen, this.playScreen, this.tableSelectionScreen]
+        this.levelCompleteScreen = document.getElementById("levelCompleteScreen");
+ 
+        this.screens = [this.menuScreen, this.playScreenTopUI, this.playScreenBottomUI, this.playScreen, this.tableSelectionScreen, this.levelCompleteScreen, this.pauseScreen, this.confirmScreen]
     }
     
     hideOne(screen){

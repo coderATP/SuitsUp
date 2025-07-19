@@ -10,12 +10,17 @@
     <link rel="stylesheet" href="styles/Menu.css" type="text/css" media="all" />
     <link rel="stylesheet" href="styles/TableSelection.css" type="text/css" media="all" />
     <link rel="stylesheet" href="styles/Play.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="styles/LevelComplete.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="styles/Pause.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="styles/Confirm.css" type="text/css" media="all" />
+
 </head>
 
 <body>
     
     <div id="gameWrapper">
         <section id="playScreen">
+        </section>
             <div id="playScreenTop">
                 <div id="marketSection">
                     
@@ -39,9 +44,7 @@
                     </div> 
                 </div>
             </div>
-            <div id="playScreenBottom"> 
-            </div>
-        </section>
+            <div id="playScreenBottom">  </div> 
         <section id="menuScreen">
             <div id="button">
                 <button id="menu_playBtn">PLAY</button>
@@ -59,16 +62,32 @@
                 </div>
                 <div id="participants">
                     <div id="twoParticipants">
-                        <input type="radio" name = "participant" value = "2"> <i>Two</i>   
+                        <input type="radio" name = "participant" value = "2" checked> <i>Two</i>   
                     </div>
                     <div id="threeParticipants">
-                        <input type="radio" name = "participant" value = "3" checked> <i>Three</i>   
+                        <input type="radio" name = "participant" value = "3"> <i>Three</i>   
                     </div>
                     <div id="fourParticipants">
                         <input type="radio" name = "participant" value = "4"> <i>Four</i>   
                     </div>
                 </div>
             </div>
+            <div id = "gameModeSection">
+                <div id="label">
+                    <label for="">Game Mode</label> 
+                </div>
+                <div id="gameModes">
+                    <div id="classicMode">
+                        <input type="radio" name = "gameMode" value = "classic" checked> <i>Classic</i>   
+                    </div>
+                    <div id="timeMode">
+                        <input type="radio" name = "gameMode" value = "time" l> <i>Race Against Time</i>   
+                    </div>
+                    <div id="scoreMode">
+                        <input type="radio" name = "gameMode" value = "score"> <i>First To 70</i>   
+                    </div>
+                </div>
+            </div> 
             <div id = "difficultiesSection">
                 <div id="label">
                     <label for="">Difficulty</label> 
@@ -94,6 +113,44 @@
             <div id="buttonsSection">
                 <button id = "tableSelection_submitBtn">SUBMIT</button>
                 <button id = "tableSelection_backBtn">BACK</button>  
+            </div>
+        </section>
+        <!--PAUSE SCREEN-->
+        <section id="pauseScreen">
+            <div id="resume">
+                <button id="pause_resumeBtn">X</button>
+                <button id="title">paused</button>  
+            </div>
+            <div id="others">
+                <button id="pause_restartBtn">RESTART</button>
+                <button id="pause_saveBtn">SAVE</button>
+                <button id="pause_menuBtn">MENU</button> 
+                </div>
+        </section>
+        <!-- RESTART CONFIRMATION DIALOGUE BOX -->
+        <section id="confirmScreen">
+            <div id="title">
+                <p id = "confirmText">Text goes here?</p> 
+            </div>
+            <div id="others">
+                <button id="yesBtn">✅</button>
+                <button id="noBtn">❌</button> 
+            </div>
+        </section>
+        <!--END-OF-LEVEL SCREEN-->
+        <section id="levelCompleteScreen">
+            <div id="message">
+                <h1>Level Complete!</h1>
+                <div id="summary">
+                    <p id="total_moves">Moves: 0</p>  
+                    <p id="time_bonus">Time bonus: 0</p> 
+                    <p id="total_score">Total score: 0</p>
+                </div>
+            </div>
+            <div id="buttons">
+                <button id="levelComplete_replayBtn">Replay</button>
+                <button id="levelComplete_menuBtn">Menu</button> 
+                <button id="levelComplete_newGameBtn">New Game</button>
             </div>
         </section>
     </div>

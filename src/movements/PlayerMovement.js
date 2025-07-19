@@ -77,7 +77,7 @@ export class PlayerMovement extends Movement{
                         card.setData({x: card.x, y: card.y})
                 })
                 sourcePile.container.list.pop();
-                  
+
                 //NEXT MOVE
                 //OPTION A: SOMEONE WINS
                 const cardBelow = targetPile.container.list[targetPile.container.length-1];
@@ -126,15 +126,23 @@ export class PlayerMovement extends Movement{
             this.scene.commandHandler.execute(command);
             //wait (for 1 sec) till card arrives from market, then deal
             setTimeout(()=>{
-                if(nextPileToDeal.id === "Player"){
+                //after arriving from market,
+                    if(nextPileToDeal.id === "Player"){
+                    //cheat for easy mode 
+                    const cardToSwap = this.scene.swapTwoCards();
+                     
                     const playerPileTopmostCard = this.table.playerPile.container.list[this.table.playerPile.container.list.length - 1];
                     playerPileTopmostCard.once("pointerdown", ()=>{ this.execute() })
                 }
                 else this.execute();    
             }, 1100)
         }
+        //if not empty, just keep dealing
         else{
             if(nextPileToDeal.id === "Player"){
+                //cheat for easy mode
+                const cardToSwap = this.scene.swapTwoCards();
+                 
                 const playerPileTopmostCard = this.table.playerPile.container.list[this.table.playerPile.container.list.length - 1];
                 playerPileTopmostCard.once("pointerdown", ()=>{ this.execute() })
             }

@@ -74,15 +74,26 @@ export class EleweNJewe{
         }
         return table;
     }
-    
+    shuffleDeck(){
+        let tempDeck = [];
+        while(this.deck.length){
+            const randomPos = Math.floor(Math.random() * this.deck.length);
+            const randomCard = (this.deck.splice(randomPos, 1))[0];
+            tempDeck.push(randomCard);
+        }
+        this.deck = tempDeck;
+        tempDeck = [];
+        return this.deck;
+    }
     newGame(){
-        this.createDeck();
-        setTimeout(()=>{this.scene.shuffle(this.deck);},50)
-        this.table = this.createTable();
+        this.deck = this.createDeck();
+        this.shuffleDeck();
+        this.table = this.createTable();   
         this.rows = [];
+        
         this.row = this.table.hud.addRowToScoreboard(this.table.scoreboard);
         this.rows.push(this.row);
         this.data = this.table.hud.addDataToRow(this.row, this.table.participants);
-        
+
     }
 }
