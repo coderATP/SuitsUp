@@ -13,7 +13,6 @@ Purchase of a card from market pile costs 1 point
 
 ```mermaid
 graph TD;
-M-->F;
 B<-->F;
 C<-->F;
 D<-->F;
