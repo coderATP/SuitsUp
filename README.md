@@ -13,12 +13,15 @@ Purchase of a card from market pile costs 1 point
 
 ```mermaid
 graph TD;
-A<-->F;
+M-->F;
 B<-->F;
 C<-->F;
 D<-->F;
 A<-->F;
-
+A-->B;
+B-->C;
+C-->D;
+D-->A;
 ```
 
 Game ends when:
