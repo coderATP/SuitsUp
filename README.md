@@ -12,7 +12,7 @@ When a participant wins, its score is calculated based on the number of cards cu
 Purchase of a card from market pile costs 1 point
 
 ```mermaid
-graph SuitsUp!;
+graph TD;
 D-->A;
 A-->B;
 B-->C;
