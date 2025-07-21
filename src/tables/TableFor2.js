@@ -1,13 +1,11 @@
 import { Table } from "./Table.js";
 import { PlayerPile } from "../piles/PlayerPile.js";
-import { EnemyPile } from "../piles/EnemyPile.js";
 
 export class TableFor2 extends Table{
     constructor(scene){
         super(scene);
         this.name = "tableFor2";
-        this.playerPile = new PlayerPile(this.scene, "Player");
-        this.enemy1Pile = new EnemyPile(this.scene, this.enemyNames[0]);
+        this.enemy1Pile = new PlayerPile(this.scene, this.enemyNames[0]);
     }
     create(){
         this.playerPile.create(
@@ -16,7 +14,7 @@ export class TableFor2 extends Table{
             this.cardWidth,
             this.cardHeight);
         this.enemy1Pile.create(
-            this.containerRect.right - this.cardWidth,
+            this.containerRect.right - this.cardWidth - this.radius,
             this.containerRect.top,
             this.cardWidth,
             this.cardHeight);

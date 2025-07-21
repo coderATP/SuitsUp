@@ -1,15 +1,13 @@
 import { Table } from "./Table.js";
 import { PlayerPile } from "../piles/PlayerPile.js";
-import { EnemyPile } from "../piles/EnemyPile.js";
 
 export class TableFor4 extends Table{
     constructor(scene){
         super(scene);
         this.name = "tableFor4";
-        this.playerPile = new PlayerPile(this.scene, "Player");
-        this.enemy1Pile = new EnemyPile(this.scene, this.enemyNames[0]);
-        this.enemy2Pile = new EnemyPile(this.scene, this.enemyNames[1]);
-        this.enemy3Pile = new EnemyPile(this.scene, this.enemyNames[2]);
+        this.enemy1Pile = new PlayerPile(this.scene, this.enemyNames[0]);
+        this.enemy2Pile = new PlayerPile(this.scene, this.enemyNames[1]);
+        this.enemy3Pile = new PlayerPile(this.scene, this.enemyNames[2]);
     }
     create(){
         //bottom

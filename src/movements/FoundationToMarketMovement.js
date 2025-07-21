@@ -1,16 +1,15 @@
 import { Movement } from "./Movement.js";
 
-export class FoundationMovement extends Movement{
-    constructor(scene, targetPile, card){
-        super(scene, card);
-        this.id = "foundationMovement";
-        this.targetPile = targetPile;
+export class FoundationToMarketMovement extends Movement{
+    constructor(scene){
+        super(scene);
+        this.id = "foundationToMarketMovement";
         this.table = this.scene.elewenjewe.table;
     }
     
     execute(){
         const sourcePile = this.table.foundationPile;
-        const targetPile = this.targetPile;
+        const targetPile = this.table.marketPile;
 
         for(let i = 0; i < sourcePile.container.length; ++i){
 

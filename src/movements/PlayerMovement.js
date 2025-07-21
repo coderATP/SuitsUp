@@ -1,11 +1,13 @@
 import { Movement } from "./Movement.js";
 import { CommandHandler } from "../CommandHandler.js";
-import { FoundationMovement } from "./FoundationMovement.js";
+import { FoundationToPlayerMovement } from "./FoundationToPlayerMovement.js";
 import { MarketMovement } from "./MarketMovement.js";
+import { WinnerMovement } from "./WinnerMovement.js";
+
 
 export class PlayerMovement extends Movement{
-    constructor(scene, card){
-        super(scene, card);
+    constructor(scene){
+        super(scene);
         this.id = "playerMovement";
         this.targetX = 0;
         this.targetY = -200;
@@ -16,7 +18,7 @@ export class PlayerMovement extends Movement{
  
     }
     
-    determineEndOfRoundScore(data, winnerPile){
+    determineEndOfRoundWinner(data, winnerPile){
         const score = this.table.foundationPile.container.length;
         const winner = winnerPile.id;
         data.forEach(cell=>{
@@ -24,7 +26,7 @@ export class PlayerMovement extends Movement{
                 cell.innerHTML = parseInt(cell.innerHTML) + score;
             }
         })
-        return {winner, score};
+        return {winnerPile, winner, score};
     }
     
     execute(){
@@ -32,18 +34,16 @@ export class PlayerMovement extends Movement{
         this.scene.commandHandler.playing = true;
         this.lastIndexToDeal++;
         
+        const marketPile = this.table.marketPile;
         const targetPile = this.table.foundationPile;
         let sourcePile = this.tempParticipants[this.lastIndexToDeal];
-
-        //access indicator
-        const indicator = this.table.playerPile.dealerIndicator;
-        indicator.moveToNextDealer(sourcePile);
         
         //REVEAL CARD OF PARTICIPANT ONLY WHEN IT'S TIME TO DEAL
         const topCard = sourcePile.container.list[sourcePile.container.length-1];
         if(topCard) topCard.setFrame(topCard.getData("frame"));
         
         if(sourcePile) this.card = sourcePile.container.list[sourcePile.container.length - 1];
+        //if(!this.card) return;
         
         targetPile.container.setDepth(0);
         if(sourcePile) sourcePile.container.setDepth(1);
@@ -77,31 +77,42 @@ export class PlayerMovement extends Movement{
                         card.setData({x: card.x, y: card.y})
                 })
                 sourcePile.container.list.pop();
-
+                this.card.destroy();
+                
                 //NEXT MOVE
+                //CLASSIC MODE
+                //return foundation cards to market when:->
+                    //1. market pile is empty
+                    //2. round has finished and nobody wins
+                    //3. most recent winner played 3 times but couldn't win
+                //TIME MODE
+                //SCORE MODE
+                
                 //OPTION A: SOMEONE WINS
                 const cardBelow = targetPile.container.list[targetPile.container.length-1];
                 const cardTop = targetPile.container.list[targetPile.container.length-2];
                 if(targetPile.container.length > 1 &&
                         cardTop.getData("suit") === cardBelow.getData("suit") 
                 ){
+                    //show winner sign on recent winner
+                    this.table.recentWinnerIndicator.moveToCurrentWinner(sourcePile);
                     //update scoreboard
-                    const winnerScore = this.determineEndOfRoundScore(this.scene.elewenjewe.data, sourcePile);
-                    
-                    // alert("winner: "+sourcePile.id);
-                    const arr = this.tempParticipants.splice(0, this.lastIndexToDeal);
-                    this.tempParticipants.push(...arr);
-                        
-                    const command = new FoundationMovement(this.scene, sourcePile);
+                    this.recentWinner = this.determineEndOfRoundWinner(this.scene.elewenjewe.data, sourcePile);
+                    //move foundation cards to most recent winner's pile
+                    const command = new FoundationToPlayerMovement(this.scene, sourcePile);
                     this.scene.commandHandler.execute(command);
-
+                    //rearrange participants so that 1st player = most recent winner
+                    const arr = this.tempParticipants.splice(0, this.lastIndexToDeal);
+                    this.tempParticipants.push(...arr); 
+                    //start a new round
                     setTimeout(()=>{
-                            this.lastIndexToDeal = -1; 
-                            this.execute();
+                        this.lastIndexToDeal = -1; 
+                        this.execute();
                     }, 1200);
                 }
                 //OPTION B: NOBODY WINS
                 else{
+                    //just continue dealing
                     this.continueDealing();
                 }
             }
@@ -117,27 +128,42 @@ export class PlayerMovement extends Movement{
         //first player deals again if nobody wins 
         this.resetDealerIndexIfNobodyWins();
         let nextPileToDeal = this.tempParticipants[this.lastIndexToDeal+1];
-        //but first check if next pile is empty
-        //if empty, move a card from market to it,
-        //then resume executing/dealing
+        //but first check if next pile to deal is empty or not
+        
+        //OPTION 1: next pile to deal is empty 
         if(nextPileToDeal.container.length === 0){
-            //deal from market
-            const command = new MarketMovement(this.scene, nextPileToDeal);
-            this.scene.commandHandler.execute(command);
-            //wait (for 1 sec) till card arrives from market, then deal
-            setTimeout(()=>{
-                //after arriving from market,
-                    if(nextPileToDeal.id === "Player"){
-                        //allow (internal) card swapping to favour player
-                        this.swapPlayerCardsBasedOnDifficultyLevel();
-                        const playerPileTopmostCard = this.table.playerPile.container.list[this.table.playerPile.container.list.length - 1];
-                        //allow player to click card before executing
-                        playerPileTopmostCard.once("pointerdown", ()=>{ this.execute() })
-                }
-                else this.execute();    
-            }, 1100)
+            //if empty, check if market pile also isn't empty and move a card from market to it,
+            //then resume executing/dealing
+            const marketPile = this.table.marketPile;
+            //OPTION a: MARKET PILE ISN'T EMPTY 
+            if(marketPile.container.length){
+                const command = new MarketMovement(this.scene, nextPileToDeal);
+                this.scene.commandHandler.execute(command); 
+                //wait (for 1 sec) till card arrives from market, then deal
+                setTimeout(()=>{
+                    //after arriving from market,
+                        if(nextPileToDeal.id === "Player"){
+                            //allow (internal) card swapping to favour player
+                            this.swapPlayerCardsBasedOnDifficultyLevel();
+                            const playerPileTopmostCard = this.table.playerPile.container.list[this.table.playerPile.container.list.length - 1];
+                            //allow player to click card before executing
+                            playerPileTopmostCard.once("pointerdown", ()=>{ this.execute() })
+                    }
+                    else this.execute();    
+                }, 1100) 
+            }
+            //OPTION b: MARKET PILE IS EMPTY
+            else{
+                //WinnerMovement is called
+                //that is, winner plays three times consecutively hoping to win that round
+                //and bust the next player to deal whose pile is empty
+                const command = new WinnerMovement(this.scene, this.recentWinner.winnerPile, nextPileToDeal);
+                this.scene.commandHandler.execute(command);
+            }
+
         }
-        //if not empty, just keep dealing
+        //OPTION 2: next pile to deal isn't empty
+        //just keep dealing
         else{
             if(nextPileToDeal.id === "Player"){
                 //allow (internal) card swapping to favour player
@@ -172,11 +198,10 @@ export class PlayerMovement extends Movement{
                 break;
             }
             case "hell": {
-               // randomNumber < 0 && this.scene.swapPlayerTopCard();
+                //randomNumber < 0 && this.scene.swapPlayerTopCard();
                 break;
             }
             default: {break;}
         }
-        
     }
 } 

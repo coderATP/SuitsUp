@@ -1,7 +1,7 @@
 import { PlayerPile } from "../piles/PlayerPile.js";
-import { EnemyPile } from "../piles/EnemyPile.js";
 import { FoundationPile } from "../piles/FoundationPile.js";
 import { MarketPile } from "../piles/MarketPile.js";
+import { WinnerIndicator } from "../entities/WinnerIndicator.js";
 
 
 import { HUD } from "../hud/Hud.js";
@@ -43,30 +43,15 @@ export class Table{
             this.radius
         );
         //piles
+        this.playerPile = new PlayerPile(this.scene, "Player");
         this.foundationPile = new FoundationPile(scene, "foundation");
         this.marketPile = new MarketPile(scene, "Market");
         //HUD
         this.hud = new HUD(this.scene);
+       //most recent winner indicator
+       this.recentWinnerIndicator = new WinnerIndicator(this.scene, 0, 0);
     }
-    /*
-    //NO MARKET
-    addCardToPiles(participantsArray){
-        const tempDeck = this.scene.elewenjewe.deck;
-        for(let i = participantsArray.length; i > 0; --i){
-            const pile = tempDeck.splice(0, tempDeck.length/i);
-            participantsArray[i-1].container.add(pile);
-            
-            //set card info
-            this.setCardsData(pile, participantsArray);
-            
-            //set card name
-            pile.forEach((card, j)=>{
-                card.setName(participantsArray[i-1].id+"Card")
-            })
-        }
-        
-        return this;
-    }*/
+    
     create(){
         //create market pile
         const marketSection = this.scene.ui.marketSection.getBoundingClientRect();
@@ -85,10 +70,11 @@ export class Table{
             this.cardHeight
         );
     }
+    
     addCardToPiles(participantsArray, market){
         const tempDeck = this.scene.elewenjewe.deck;
         for(let i = participantsArray.length; i > 0; --i){
-            const pile = tempDeck.splice(0, 10);
+            const pile = tempDeck.splice(0, 12);
             participantsArray[i-1].container.add(pile);
             
             //set card info
@@ -100,13 +86,14 @@ export class Table{
             })
         }
         //add remaining cards to market pile and set data accordingly
-        market.container.add(tempDeck);
+        market.container.add(tempDeck);  
         this.setMarketCardsData(market.container.list);
         return this;
     }
+    
     setParticipantsCardsData(pile){
         pile.forEach((card, i)=>{
-            card.setPosition(-i, -i)
+            card.setPosition(-i*0.5, -i*0.5)
             .setFrame(card.getData("frame"))
             .setInteractive({draggable: false})
             
@@ -123,9 +110,10 @@ export class Table{
 
         return this;
     }
+    
     setMarketCardsData(pile){
         pile.forEach((card, i)=>{
-            card.setPosition(0, -i*0.25)
+            card.setPosition(-i*0.5, -i*0.5)
             .setName("marketCard")
             .setFrame(52)
             .setInteractive({draggable: false})

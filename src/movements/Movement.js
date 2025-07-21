@@ -1,7 +1,6 @@
 export class Movement{
-    constructor(scene, card){
+    constructor(scene){
         this.scene = scene;
-        this.card = card;
         this.config = scene.config;
         this.graphics = scene.graphics;
     }

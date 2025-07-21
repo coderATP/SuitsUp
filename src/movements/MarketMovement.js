@@ -1,14 +1,15 @@
 import { Movement } from "./Movement.js";
 
 export class MarketMovement extends Movement{
-    constructor(scene, targetPile, card){
-        super(scene, card);
+    constructor(scene, targetPile){
+        super(scene, null);
         this.id = "marketMovement";
         this.targetPile = targetPile;
         this.table = this.scene.elewenjewe.table;
     }
     
     execute(){
+        //if(!this.card) return;
         const sourcePile = this.table.marketPile;
         const targetPile = this.targetPile;
         this.card = sourcePile.container.list[sourcePile.container.length-1];

@@ -40,6 +40,7 @@ export class EleweNJewe{
                        suit: EleweNJewe.CARD_SUITS[i],
                        colour: Object.values(EleweNJewe.CARD_COLOURS)[i]
                    })
+               
                this.deck.push(card);
             }
         }

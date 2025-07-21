@@ -84,13 +84,14 @@ export class PlayScene extends BaseScene{
         //TO-DO: move a card from draw-pile to discard-pile on clicking the draw-pile
         this.input.on("pointerdown", (pointer, gameobject)=>{
             //return if click on empty space
-            if(!gameobject[0]) return;
+           if(!gameobject[0]) return;
             if(gameobject[0].name === "PlayerCard"){
                 if(this.commandHandler.playing) return;
                // alert ("player bout to deal")
-                const command = new PlayerMovement(this, gameobject[0]);
-                this.commandHandler.execute(command);
+                const command = new PlayerMovement(this);
+                this.commandHandler.execute(command);  
             }
+            
         })
         //PlayScene icons
         this.ui.playSceneIcons.forEach(icon=>{
@@ -170,7 +171,7 @@ export class PlayScene extends BaseScene{
         if(cardToSwap){
             this.elewenjewe.table.playerPile.container.bringToTop(cardToSwap);
             playerCardsArray.forEach((card, i)=>{
-                card.setPosition(0, -i*2)
+                card.setPosition(-i*0.5, -i*0.5)
                 card.setData({x: card.x, y: card.y})
                 card.setFrame(card.getData("frame"))
             })

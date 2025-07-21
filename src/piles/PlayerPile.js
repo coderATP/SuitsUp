@@ -1,5 +1,3 @@
-import { DealerIndicator } from "../entities/DealerIndicator.js";
-
 export class PlayerPile{
     constructor(scene, id){
         this.scene = scene;
@@ -21,11 +19,6 @@ export class PlayerPile{
        //name
        this.name = this.scene.add.text(0,0, this.id, { fontSize: "16px", fontFamily: "myOtherFont", color: "black"}).setOrigin(0)
        this.name.setPosition(x + w/2 -this.name.width/2, y+h);
-       //current dealer indicator
-       this.dealerIndicator = new DealerIndicator(this.scene,
-           this.rect.x,
-           this.rect.y
-       )
        return this; 
     }
 }
