@@ -94,7 +94,7 @@ export class Table{
     setParticipantsCardsData(pile){
         pile.forEach((card, i)=>{
             card.setPosition(-i*0.5, -i*0.5)
-            .setFrame(card.getData("frame"))
+            .setFrame(52)
             .setInteractive({draggable: false})
             
             card.setData({
@@ -107,7 +107,9 @@ export class Table{
                 cardIndex: i
             });
         });
-
+        this.playerPile.container.list.forEach(card=>{
+            card.setFrame(card.getData("frame"));
+        })
         return this;
     }
     
