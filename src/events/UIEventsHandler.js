@@ -1,3 +1,4 @@
+
 export class UIEventsHandler{
     constructor(scene){
         this.scene = scene;
@@ -18,6 +19,7 @@ export class UIEventsHandler{
         this.pause_saveBtn = document.getElementById("pause_saveBtn");
         this.pause_restartBtn = document.getElementById("pause_restartBtn");
         this.pause_menuBtn = document.getElementById("pause_menuBtn");
+        this.pauseBtns = [this.pause_resumeBtn, this.pause_restartBtn, this.pause_saveBtn, this.pause_menuBtn];
         //texts
         this.undoText = document.getElementById("undoText");
         this.redoText = document.getElementById("redoText");
@@ -43,26 +45,17 @@ export class UIEventsHandler{
         this.menu_tutorialBtn = document.getElementById("menu_tutorialBtn");
         this.menu_exitBtn = document.getElementById("menu_exitBtn");
         this.menu_continueBtn = document.getElementById("menu_continueBtn"); 
-        this.menuBtns = [this.menu_playBtn, this.menu_optionsBtn, this.menu_leaderboardBtn, this.menu_tutorialBtn, this.menu_exitBtn];
+        this.menuBtns = [this.menu_playBtn, this.menu_continueBtn, this.menu_optionsBtn, this.menu_leaderboardBtn, this.menu_tutorialBtn, this.menu_exitBtn];
          
         //TableSelection
         this.tableSelection_submitBtn = document.getElementById("tableSelection_submitBtn");
         this.tableSelection_backBtn = document.getElementById("tableSelection_backBtn");
- 
+        this.tableSelectionBtns = [this.tableSelection_backBtn, this.tableSelection_submitBtn];
         //this.addClickSound();
     }
     
     changeID(element, newID){
         element.id = newID;
-    }
-
-    addClickSound(){
-        this.playSceneIcons.forEach(icon=>{
-            icon.addEventListener('click', (e)=>{
-                if(e.target.id !== "undoIcon" && e.target.id !== "redoIcon")
-                this.scene.audio.play(this.scene.audio.buttonClickSound);
-            })
-        })
     }
     
 }

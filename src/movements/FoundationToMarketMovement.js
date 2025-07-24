@@ -8,6 +8,9 @@ export class FoundationToMarketMovement extends Movement{
     }
     
     execute(){
+        // audio
+        this.preloadScene.audio.opponentWinSound.play();
+        
         const sourcePile = this.table.foundationPile;
         const targetPile = this.table.marketPile;
 

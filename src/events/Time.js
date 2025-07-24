@@ -1,6 +1,8 @@
 export class Time{
     constructor(scene){
         this.scene = scene;
+        const { PreloadScene } = scene.game.scene.keys;
+        this.preloadScene = PreloadScene;
     }
     
     createTimeVariables(){
@@ -25,21 +27,25 @@ export class Time{
     setUpWatch(renderer){
         this.createTimeVariables();
         this.stopwatch = setInterval(()=>{
+            this.preloadScene.audio.clockTickSound.play();
             this.startWatch(renderer);
         }, 1000);
         return this;
     }
     resumeWatch(renderer){
         this.stopwatch = setInterval(()=>{
+            this.preloadScene.audio.clockTickSound.play();
             this.startWatch(renderer);
         }, 1000);
     }
     stopWatch(){
+        this.preloadScene.audio.clockTickSound.stop();
         clearInterval(this.stopwatch);
         this.paused = true;
         return this;
     }
     resetWatch(renderer){
+        this.preloadScene.audio.clockTickSound.stop(); 
         clearInterval(this.stopwatch);
         this.createTimeVariables();
         renderer.innerText = "00:00"; 

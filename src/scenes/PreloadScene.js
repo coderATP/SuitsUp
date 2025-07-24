@@ -1,4 +1,6 @@
 import { BaseScene } from "./BaseScene.js";
+import { AudioControl } from "../audio/AudioControl.js";
+
 
 export class PreloadScene extends BaseScene{
     constructor(config) {
@@ -15,14 +17,14 @@ export class PreloadScene extends BaseScene{
         let audioFileIndex = 0;
         this.text = "sounds";
         const audioFiles = [
-           // ['playSong', "sounds/overworld.ogg"],
-           // ['buttonClickSound', 'sounds/click.wav'],
-            ['beginGameSound', "sounds/begin_game.wav"],
+            ['menuSong', "sounds/menu.mp3"],
+            ['clockTickSound', "sounds/clock.ogg"], 
+            ['playSong', "sounds/new_game.ogg"],
             ['drawSound', "sounds/draw.wav"],
-           // ['dropSound', "sounds/drop.wav"],
-          //  ['errorSound', "sounds/error_sound.wav"],
-           // ['undoSound', "sounds/undo.wav"],
-          //  ['shuffleSound', "sounds/shuffle.wav"],
+            ['playerWinSound', "sounds/player_win.ogg"],
+            ['opponentWinSound', "sounds/opponent_win.wav"],
+            ['gameCompleteSound', "sounds/game_complete.wav"],
+            ['buttonClickSound', "sounds/button_sound.wav"],
             ['popUpSound', "sounds/pop_up.ogg"],
         ]
         this.load.audio(...audioFiles[audioFileIndex]);
@@ -78,6 +80,9 @@ export class PreloadScene extends BaseScene{
         })
         this.loadFiles(); 
 
+    }
+    create(){
+        this.audio = new AudioControl(this);
     }
     
 }

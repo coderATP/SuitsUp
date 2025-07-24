@@ -54,14 +54,16 @@ export class WinnerMovement extends Movement{
                 //OPTION A: SOMEONE WINS
                 const cardBelow = targetPile.container.list[targetPile.container.length-1];
                 const cardTop = targetPile.container.list[targetPile.container.length-2];
-                if(targetPile.container.length > 3 &&
+                if(targetPile.container.length > 1 &&
                     cardTop.getData("suit") === cardBelow.getData("suit") 
                 ){
                     alert(sourcePile.id + " wins!!!")
                 }
                 //OPTION B: NOBODY WINS
                 else{
-                    if(this.winnerDealCountToWin < 1){
+                    if(this.winnerDealCountToWin < 3){
+                        //play draw card sound
+                        this.preloadScene.audio.play(this.preloadScene.audio.drawSound);
                         this.execute();
                         this.winnerDealCountToWin++;
                     }

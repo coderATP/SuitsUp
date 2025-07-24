@@ -19,10 +19,13 @@ export class PlayScene extends BaseScene{
     }
     
     showInterface(){
+        const { PreloadScene } = this.game.scene.keys;
         eventEmitter.destroy("TableSelectionToPlay");
         this.hideAllScreens();
         this.showOne(this.playScreen, "grid", -1);
         this.showMultiple([this.playScreenTopUI, this.playScreenBottomUI], "flex", 0);
+        PreloadScene.audio.menuSong.stop();
+        PreloadScene.audio.playSong.play();
     }
     createCard(type, x, y){
         const card =  this.add.image(x,y,"cards").setName(type).setOrigin(0).setScale(this.config.zoomFactor);
@@ -140,6 +143,8 @@ export class PlayScene extends BaseScene{
     }
     create(){
         this.showInterface();
+       
+        //ui
         this.ui = new UIEventsHandler(this);
         //watch
         this.watch = new Time(this);

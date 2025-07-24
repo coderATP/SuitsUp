@@ -9,7 +9,8 @@ export class MarketMovement extends Movement{
     }
     
     execute(){
-        //if(!this.card) return;
+       // this.scene.audio.play(this.scene.audio.drawSound); 
+
         const sourcePile = this.table.marketPile;
         const targetPile = this.targetPile;
         this.card = sourcePile.container.list[sourcePile.container.length-1];

@@ -11,7 +11,10 @@ export class FoundationToPlayerMovement extends Movement{
     execute(){
         const sourcePile = this.table.foundationPile;
         const targetPile = this.targetPile;
-
+        //play right sound for player
+        if(targetPile.id === "Player") this.preloadScene.audio.playerWinSound.play();
+        else this.preloadScene.audio.opponentWinSound.play(); 
+             
         for(let i = 0; i < sourcePile.container.length; ++i){
 
             const originalCard = sourcePile.container.list[i];
@@ -19,7 +22,7 @@ export class FoundationToPlayerMovement extends Movement{
                 targets: originalCard,
                 y: targetPile.y - sourcePile.y,
                 x: targetPile.x - sourcePile.x,
-                duration: 500,
+                duration: 800,
                 ease: "Quadratic",
                 onComplete: ()=>{
                     const card = this.scene.createCard(targetPile.id+"Card", originalCard.getData("x"), originalCard.getData("y"))

@@ -1,8 +1,13 @@
 section#menuScreen{
     position: absolute;
-    background-color: #102030;
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 70%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 5%;
+    box-shadow: 5px 5px 50px brown;
+    transform: translate(-50%, -50%); 
     display: none;
 }
 section#menuScreen div#button{

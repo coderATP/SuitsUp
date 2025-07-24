@@ -31,6 +31,7 @@ export class TableSelectionScene extends BaseScene{
         })
         return checkedRadioElement;
     }
+    
     create(){
         const { MenuScene } = this.game.scene.keys;
         MenuScene.clicked = true;

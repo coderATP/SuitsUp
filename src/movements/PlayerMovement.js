@@ -43,7 +43,6 @@ export class PlayerMovement extends Movement{
         if(topCard) topCard.setFrame(topCard.getData("frame"));
         
         if(sourcePile) this.card = sourcePile.container.list[sourcePile.container.length - 1];
-        //if(!this.card) return;
         
         targetPile.container.setDepth(0);
         if(sourcePile) sourcePile.container.setDepth(1);

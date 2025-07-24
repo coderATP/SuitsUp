@@ -1,5 +1,4 @@
 section#tableSelectionScreen{
-    background-color: #102030;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -7,7 +6,8 @@ section#tableSelectionScreen{
     width: 95%;
     height: 40%;
     display: none;
-    border: 15px groove blue;
+    border-radius: 5%;
+    box-shadow: 5px 5px 50px brown; 
 }
 /* height designations */
 div#participantsSection{
@@ -69,12 +69,17 @@ i{
 section#tableSelectionScreen div#buttonsSection button {
     font-family: myOtherFont;
     font-size: 2rem;
-    width: 40%;
+    width: 30%;
     height: 100%;
+    position: absolute; 
+    bottom: 10%;
 }
 section#tableSelectionScreen div#buttonsSection button#tableSelection_submitBtn{
     background-color: blue;
+    left: 3%;
 }
 section#tableSelectionScreen div#buttonsSection button#tableSelection_backBtn{
     background-color: red;
+    position: absolute;
+    right: 3%;
 }
