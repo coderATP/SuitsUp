@@ -2,9 +2,8 @@ import { PlayerPile } from "../piles/PlayerPile.js";
 import { FoundationPile } from "../piles/FoundationPile.js";
 import { MarketPile } from "../piles/MarketPile.js";
 import { WinnerIndicator } from "../entities/WinnerIndicator.js";
-
-
 import { HUD } from "../hud/Hud.js";
+
 
 export class Table{
     constructor(scene){
