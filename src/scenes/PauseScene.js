@@ -5,7 +5,7 @@ export class PauseScene extends BaseScene{
     constructor(config){
         super("PauseScene", config);
         this.config = config;
-        this.gamePaused = true;
+        this.gamePaused = null; //flag
     }
     
     showInterface(){
@@ -14,7 +14,8 @@ export class PauseScene extends BaseScene{
     }
 
     create(){
-        //this.gamePaused = true;
+        const { PreloadScene } = this.game.scene.keys;
+        this.preloadScene = PreloadScene;
         this.showInterface();
         this.handleGamePause();
         this.processEvents();
@@ -22,8 +23,8 @@ export class PauseScene extends BaseScene{
     processEvents(){
         const { PlayScene } = this.game.scene.keys;
         eventEmitter.once("PauseToConfirm", ()=>{
-            //PlayScene.audio.popUpSound.play();
-            //this.scene.start("ConfirmScene");
+            this.preloadScene.audio.popUpSound.play();
+            this.scene.start("ConfirmScene");
         })
     }
     handleGamePause(){
@@ -36,9 +37,9 @@ export class PauseScene extends BaseScene{
                 PlayScene.watch.resumeWatch(this.ui.timeText);
                 this.scene.stop();
                 if(this.scene.isPaused("PlayScene")) this.scene.resume("PlayScene");
-               // PlayScene.audio.play(PlayScene.audio.buttonClickSound);
+                this.preloadScene.audio.play(this.preloadScene.audio.buttonClickSound);
                 this.hideOne(this.pauseScreen);
-                this.gamePaused = false; 
+                this.gamePaused = null; 
             }
             
         })
@@ -49,8 +50,8 @@ export class PauseScene extends BaseScene{
         })
         //RESTART
         PlayScene.ui.pause_restartBtn.addEventListener('click', ()=>{
-            this.confirmText.innerText = "Restart?"
-            eventEmitter.emit("PauseToConfirm");
+           // this.confirmText.innerText = "Restart?"
+            //eventEmitter.emit("PauseToConfirm");
         })
         
     }

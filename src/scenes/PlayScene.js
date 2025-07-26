@@ -15,12 +15,16 @@ export class PlayScene extends BaseScene{
         this.config = config;
         this.commandHandler = new CommandHandler(this);
         this.elewenjewe = new EleweNJewe(this);
- 
     }
     
     showInterface(){
         const { PreloadScene } = this.game.scene.keys;
+        eventEmitter.destroy("PlayToPause");
+        eventEmitter.destroy("ConfirmToPause");
+        eventEmitter.destroy("ConfirmToMenu"); 
+        eventEmitter.destroy("ConfirmToRestart");
         eventEmitter.destroy("TableSelectionToPlay");
+        
         this.hideAllScreens();
         this.showOne(this.playScreen, "grid", -1);
         this.showMultiple([this.playScreenTopUI, this.playScreenBottomUI], "flex", 0);
@@ -84,17 +88,13 @@ export class PlayScene extends BaseScene{
     }
     
     handleClickEvent(){
-        //TO-DO: move a card from draw-pile to discard-pile on clicking the draw-pile
-        this.input.on("pointerdown", (pointer, gameobject)=>{
-            //return if click on empty space
-           if(!gameobject[0]) return;
-            if(gameobject[0].name === "PlayerCard"){
+        //player card
+        this.elewenjewe.table.playerPile.container.list.forEach((card)=>{
+            card.on("pointerdown", ()=>{
                 if(this.commandHandler.playing) return;
-               // alert ("player bout to deal")
                 const command = new PlayerMovement(this);
-                this.commandHandler.execute(command);  
-            }
-            
+                this.commandHandler.execute(command);
+            }) 
         })
         //PlayScene icons
         this.ui.playSceneIcons.forEach(icon=>{
@@ -109,13 +109,14 @@ export class PlayScene extends BaseScene{
     }
     processEvents(){
         const { /* GameCompleteScene, */ PauseScene } = this.game.scene.keys;
-        
+        PauseScene.gamePaused = false;
         eventEmitter.on("PlayToPause", ()=>{
             //flags to avoid multiple event calling
-            if(!this.scene.isPaused("PlayScene")){
-                if(!PauseScene.gamePaused) this.scene.pause();
-                //this.audio.popUpSound.play();
+            if(!PauseScene.gamePaused){
+                this.scene.pause();
+                this.preloadScene.audio.popUpSound.play();
                 this.scene.launch("PauseScene");
+                this.registry.set("gamePaused", true);
                 PauseScene.gamePaused = true;
             }
         })
@@ -127,7 +128,6 @@ export class PlayScene extends BaseScene{
             this.audio.playSong.stop();
             GameCompleteScene.gamePaused = true;
         })
-        eventEmitter.once("PlayToTitle", ()=>{ this.scene.start("TitleScene")})
     }
      
     shuffle(array){
@@ -142,6 +142,8 @@ export class PlayScene extends BaseScene{
         return array;
     }
     create(){
+        const { PreloadScene } = this.game.scene.keys;
+        this.preloadScene = PreloadScene;
         this.showInterface();
        
         //ui

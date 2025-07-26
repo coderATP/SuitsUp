@@ -17,6 +17,8 @@ export class TableSelectionScene extends BaseScene{
         this.scene.stop("PlayScene");
         if(PlayScene.audio) PlayScene.audio.playSong.stop();
         */
+        this.scene.stop("PlayScene");
+        eventEmitter.destroy("MenuToTableSelection"); 
         this.hideAllScreens();
         this.showOne(this.tableSelectionScreen, "grid", 0);
     }
@@ -51,7 +53,6 @@ export class TableSelectionScene extends BaseScene{
             this.registry.set("numberOfOpponents", parseInt(numberOfOpponents));
             this.registry.set("difficulty", difficulty);
             this.registry.set("gameMode", gameMode);
-
             this.scene.start("PlayScene");
         })
         eventEmitter.once("TableSelectionToMenu", ()=>{

@@ -24,9 +24,7 @@ export class TableFor3 extends Table{
             this.containerRect.top,
             this.cardWidth,
             this.cardHeight);
-        [this.enemy1Pile, this.enemy2Pile].forEach(pile=>{
-            pile.container.list.forEach(card=>{ card.setFrame(52) })
-        })
+
         this.participants.push(this.playerPile, this.enemy1Pile, this.enemy2Pile);
         //create scoreboard
         this.scoreboard = this.hud.createScoreboard(this.participants);

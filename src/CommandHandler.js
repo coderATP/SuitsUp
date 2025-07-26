@@ -12,7 +12,7 @@ export class CommandHandler{
     }
     
     execute(command){
-       this.playing = true;
+        this.playing = true;
         command.execute();
         this.moves.push(command);
         this.movesToUndo++;

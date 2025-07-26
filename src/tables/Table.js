@@ -85,7 +85,7 @@ export class Table{
             })
         }
         //add remaining cards to market pile and set data accordingly
-        market.container.add(tempDeck);  
+        market.container.add(tempDeck.splice(0, tempDeck.length )); 
         this.setMarketCardsData(market.container.list);
         return this;
     }

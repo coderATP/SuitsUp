@@ -2,6 +2,7 @@ import { TableFor2 } from "./tables/TableFor2.js";
 import { TableFor3 } from "./tables/TableFor3.js";
 import { TableFor4 } from "./tables/TableFor4.js";
 
+import { PlayerMovement } from "./movements/PlayerMovement.js";
 
 export class EleweNJewe{
     static CARD_BACK_FRAMES = [52, 53, 54, 55, 56];
@@ -90,14 +91,22 @@ export class EleweNJewe{
         return this.deck;
     }
     newGame(){
-        this.deck = this.createDeck();
+        if(!this.deck.length) this.deck = this.createDeck();
         this.shuffleDeck();
-        this.table = this.createTable();   
+        this.table = this.createTable();
+
         this.rows = [];
-        
         this.row = this.table.hud.addRowToScoreboard(this.table.scoreboard);
         this.rows.push(this.row);
         this.data = this.table.hud.addDataToRow(this.row, this.table.participants);
-
+        
+        this.scene.commandHandler.playing = false;
+    }
+    
+    onRestart(){
+        this.deck = [];
+        this.table = null;
+        this.row = null;
+        this.data = null;
     }
 }

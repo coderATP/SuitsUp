@@ -11,8 +11,8 @@ export class MenuScene extends BaseScene{
     showInterface(){
         eventEmitter.destroy("TableSelectionToMenu")
         const { PreloadScene } = this.game.scene.keys; 
-       // eventEmitter.destroy("ConfirmToTitle"); 
-       // eventEmitter.destroy("GameCompleteToMenu");
+        eventEmitter.destroy("ConfirmToMenu"); 
+        eventEmitter.destroy("GameCompleteToMenu");
         this.hideAllScreens();
         this.showOne(this.menuScreen, "grid", 0);
         this.scene.stop("PlayScene");
@@ -44,12 +44,12 @@ export class MenuScene extends BaseScene{
         this.title.setPosition(this.config.width/2 - this.title.displayWidth/2, 10);
 
         this.ui.menu_playBtn.addEventListener("click", ()=>{
-            eventEmitter.emit("MenuToPlay");
+            eventEmitter.emit("MenuToTableSelection");
         }) 
         this.ui.menu_optionsBtn.addEventListener("click", ()=>{
-            eventEmitter.emit("MenuToOptions");
+          //  eventEmitter.emit("MenuToOptions");
         })
-        eventEmitter.once("MenuToPlay", ()=>{
+        eventEmitter.once("MenuToTableSelection", ()=>{
             this.scene.start("TableSelectionScene");
         })
         this.tweens.add({

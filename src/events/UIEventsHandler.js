@@ -52,6 +52,8 @@ export class UIEventsHandler{
         this.tableSelection_backBtn = document.getElementById("tableSelection_backBtn");
         this.tableSelectionBtns = [this.tableSelection_backBtn, this.tableSelection_submitBtn];
         //this.addClickSound();
+        //confirm
+        this.confirmText = document.getElementById("confirmText"); 
     }
     
     changeID(element, newID){

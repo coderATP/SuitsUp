@@ -30,8 +30,9 @@ export class PlayerMovement extends Movement{
     }
     
     execute(){
-        //A RECURSIVE FUNCTION: keeps calling itself
+        //CommandHandler is playing, don't allow user input
         this.scene.commandHandler.playing = true;
+        //A RECURSIVE FUNCTION: keeps calling itself
         this.lastIndexToDeal++;
         
         const marketPile = this.table.marketPile;
