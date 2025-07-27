@@ -11,12 +11,13 @@ When a participant wins, its score is calculated based on the number of cards cu
 
 Purchase of a card from market pile costs 1 point
 
-graph SuitsUp!;
+```mermaid
+graph TD;
 D-->A;
 A-->B;
 B-->C;
 C-->D;
-
+```
 Game ends when:
 
 1. opponent runs out of cards and no card remains in the market to purchase
@@ -24,10 +25,10 @@ Game ends when:
 2. one of the participants reaches a score of **70**;
 
 There will be five difficulty modes:
-- [ ] > easy
-- [ ] > normal
-- [ ] > hard
-- [ ] > legend
+- [x] > easy
+- [x] > normal
+- [x] > hard
+- [x] > legend
 - [x] > hell
 
 There will be three options to choose from:

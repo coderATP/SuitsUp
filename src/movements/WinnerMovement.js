@@ -3,6 +3,8 @@ import { FoundationToMarketMovement } from "./FoundationToMarketMovement.js";
 import { MarketMovement } from "./MarketMovement.js";
 import { PlayerMovement } from "./PlayerMovement.js";
 
+import { eventEmitter } from "../events/EventEmitter.js";
+
 
 export class WinnerMovement extends Movement{
     constructor(scene, sourcePile, nextPileToDeal){
@@ -57,7 +59,11 @@ export class WinnerMovement extends Movement{
                 if(targetPile.container.length > 1 &&
                     cardTop.getData("suit") === cardBelow.getData("suit") 
                 ){
-                    alert(sourcePile.id + " wins!!!")
+                    alert(sourcePile.id + " wins!!!");
+                    eventEmitter.emit("GameComplete");
+                    //this.preloadScene.audio.playerWinSound.play();
+                    
+                    //this.scene.start("GameCompleteScene");
                 }
                 //OPTION B: NOBODY WINS
                 else{

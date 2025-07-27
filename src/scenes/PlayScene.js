@@ -108,7 +108,7 @@ export class PlayScene extends BaseScene{
         return this;
     }
     processEvents(){
-        const { /* GameCompleteScene, */ PauseScene } = this.game.scene.keys;
+        const { GameCompleteScene, PauseScene } = this.game.scene.keys;
         PauseScene.gamePaused = false;
         eventEmitter.on("PlayToPause", ()=>{
             //flags to avoid multiple event calling
@@ -120,12 +120,12 @@ export class PlayScene extends BaseScene{
                 PauseScene.gamePaused = true;
             }
         })
-        eventEmitter.on("PlayToGameComplete", ()=>{
+        eventEmitter.on("GameComplete", ()=>{
             //PAUSE GAME
             if(!this.scene.isPaused("PlayScene")) this.scene.pause();
             this.scene.launch("GameCompleteScene");
-            this.audio.popUpSound.play();
-            this.audio.playSong.stop();
+            this.preloadScene.audio.popUpSound.play();
+            this.preloadScene.audio.playSong.stop();
             GameCompleteScene.gamePaused = true;
         })
     }

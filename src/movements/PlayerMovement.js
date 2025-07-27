@@ -12,7 +12,7 @@ export class PlayerMovement extends Movement{
         this.targetX = 0;
         this.targetY = -200;
         this.table = this.scene.elewenjewe.table;
-        this.lastIndexToDeal = -1;
+        this.lastIndexToDeal = this.table.participants.length - 2;
         this.scene = scene;
         this.tempParticipants = this.table.participants.slice();
  
@@ -33,7 +33,7 @@ export class PlayerMovement extends Movement{
         //CommandHandler is playing, don't allow user input
         this.scene.commandHandler.playing = true;
         //A RECURSIVE FUNCTION: keeps calling itself
-        this.lastIndexToDeal++;
+        this.lastIndexToDeal++; //player starts
         
         const marketPile = this.table.marketPile;
         const targetPile = this.table.foundationPile;

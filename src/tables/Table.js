@@ -72,8 +72,10 @@ export class Table{
     
     addCardToPiles(participantsArray, market){
         const tempDeck = this.scene.elewenjewe.deck;
+        market.container.add(tempDeck.splice(0, 3)); 
+ 
         for(let i = participantsArray.length; i > 0; --i){
-            const pile = tempDeck.splice(0, 12);
+            const pile = tempDeck.splice(0, 48);
             participantsArray[i-1].container.add(pile);
             
             //set card info
@@ -85,7 +87,7 @@ export class Table{
             })
         }
         //add remaining cards to market pile and set data accordingly
-        market.container.add(tempDeck.splice(0, tempDeck.length )); 
+        //market.container.add(tempDeck.splice(0, tempDeck.length )); 
         this.setMarketCardsData(market.container.list);
         return this;
     }

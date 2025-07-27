@@ -32,9 +32,13 @@ export class UIEventsHandler{
         this.movesText = document.getElementById("movesText");
         this.timeText = document.getElementById("timeText");
         //win
-        this.levelCompleteTotalMovesText = document.getElementById("total_moves");
-        this.levelCompleteTimeBonusText = document.getElementById("time_bonus");
-        this.levelCompleteTotalScoreText = document.getElementById("total_score");
+        this.levelCompleteTotalScoreText = document.getElementById("winner");
+        this.levelCompleteTotalMovesText = document.getElementById("total_rounds");
+        this.levelCompleteTimeBonusText = document.getElementById("most_winner");
+        this.levelCompleteTotalScoreText = document.getElementById("jackpot_win");
+        this.levelCompleteTotalMovesText = document.getElementById("smallest_win");
+        this.levelCompleteTimeBonusText = document.getElementById("motm");
+        
         this.levelComplete_replayBtn = document.getElementById("levelComplete_replayBtn");
         this.levelComplete_menuBtn = document.getElementById("levelComplete_menuBtn");
         this.levelComplete_newGameBtn = document.getElementById("levelComplete_newGameBtn");

@@ -19,7 +19,7 @@ export class TableFor2 extends Table{
             this.cardWidth,
             this.cardHeight);
 
-        this.participants.push(this.playerPile, this.enemy1Pile);
+        this.participants.unshift(this.enemy1Pile, this.playerPile);
         //create scoreboard
         this.scoreboard = this.hud.createScoreboard(this.participants);
         super.create();
