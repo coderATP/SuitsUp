@@ -6,6 +6,8 @@ import { PlayScene } from "./src/scenes/PlayScene.js";
 import { PauseScene } from "./src/scenes/PauseScene.js";
 import { ConfirmScene } from "./src/scenes/ConfirmScene.js";
 import { GameCompleteScene } from "./src/scenes/GameCompleteScene.js";
+import { OptionsScene } from "./src/scenes/OptionsScene.js";
+import { CreditsScene } from "./src/scenes/CreditsScene.js";
 
 
 const GAME_WIDTH = innerWidth;
@@ -61,7 +63,9 @@ const config= {
         new PlayScene(SHARED_CONFIG),
         new PauseScene(SHARED_CONFIG),
         new ConfirmScene(SHARED_CONFIG),
-        new GameCompleteScene(SHARED_CONFIG)
+        new GameCompleteScene(SHARED_CONFIG),
+        new OptionsScene(SHARED_CONFIG),
+        new CreditsScene(SHARED_CONFIG)
     ],
 };
 

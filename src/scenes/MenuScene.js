@@ -10,7 +10,7 @@ export class MenuScene extends BaseScene{
     
     showInterface(){
         eventEmitter.destroy("TableSelectionToMenu")
-        const { PreloadScene } = this.game.scene.keys; 
+        const { PreloadScene, PlayScene } = this.game.scene.keys; 
         eventEmitter.destroy("ConfirmToMenu"); 
         eventEmitter.destroy("GameCompleteToMenu");
         this.hideAllScreens();
@@ -38,6 +38,7 @@ export class MenuScene extends BaseScene{
         }) 
     }
     create(){
+        const { PlayScene } = this.game.scene.keys;
         this.showInterface();
         this.playButtonSound()
         this.title = this.add.image(0,0,"title").setOrigin(0).setScale(1);
@@ -47,11 +48,29 @@ export class MenuScene extends BaseScene{
             eventEmitter.emit("MenuToTableSelection");
         }) 
         this.ui.menu_optionsBtn.addEventListener("click", ()=>{
-          //  eventEmitter.emit("MenuToOptions");
+            eventEmitter.emit("MenuToOptions");
         })
+        this.ui.menu_creditsBtn.addEventListener("click", ()=>{
+            eventEmitter.emit("MenuToCredits");
+        });
+        this.ui.menu_exitBtn.addEventListener("click", ()=>{
+            eventEmitter.emit("MenuToExit");
+        });
         eventEmitter.once("MenuToTableSelection", ()=>{
             this.scene.start("TableSelectionScene");
         })
+        eventEmitter.once("MenuToOptions", ()=>{
+            this.scene.start("OptionsScene");
+        })
+        eventEmitter.once("MenuToCredits", ()=>{
+            this.scene.start("CreditsScene");
+        })
+        eventEmitter.once("MenuToExit", ()=>{
+            PlayScene.ui.confirmText.innerText = "Quit Game?";
+            this.scene.start("ConfirmScene");
+           // window.open("", "_blank")
+          //  this.game.destroy(true, true);
+        })   
         this.tweens.add({
             targets: this.ui.menu_playBtn,
             alpha: 0.2,

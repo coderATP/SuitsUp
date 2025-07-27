@@ -9,7 +9,8 @@ export class ConfirmScene extends BaseScene{
     }
     
     showInterface(){
-        this.hideMultiple([this.pauseScreen, this.levelCompleteScreen]);
+        eventEmitter.destroy("MenuToExit");
+        this.hideMultiple([this.pauseScreen, this.levelCompleteScreen, this.menuScreen]);
         this.showOne(this.confirmScreen, "grid", 0)
     }
 
@@ -22,11 +23,23 @@ export class ConfirmScene extends BaseScene{
         let clicked = false;
         const { PreloadScene, PauseScene, PlayScene } = this.game.scene.keys;
         noBtn.addEventListener("click", ()=>{
-            eventEmitter.emit("ConfirmToPause");
+            switch(PlayScene.ui.confirmText.innerText){
+                case "Return to Menu?" : case "Restart?":{
+                    eventEmitter.emit("ConfirmToPause"); 
+                break;
+                }
+                case "Quit Game?": {
+                    eventEmitter.emit("ConfirmToMenu"); 
+                break;
+                }
+                default:{
+                break;
+                }
+            }
         })
         yesBtn.addEventListener("click", ()=>{
             if(PlayScene.ui.confirmText.innerText === "Return to Menu?") eventEmitter.emit("ConfirmToMenu");
-        
+            else if(PlayScene.ui.confirmText.innerText === "Quit Game?") eventEmitter.emit("ConfirmToQuit");
             else if(PlayScene.ui.confirmText.innerText === "Restart?") eventEmitter.emit("ConfirmToRestart");
         }) 
         eventEmitter.once("ConfirmToPause", ()=>{
@@ -37,7 +50,11 @@ export class ConfirmScene extends BaseScene{
             PreloadScene.audio.popUpSound.play();
             this.scene.start("MenuScene");
         })
-
+        eventEmitter.once("ConfirmToQuit", ()=>{
+            PreloadScene.audio.popUpSound.play();
+            this.game.destroy(true, true);
+            window.open("", "_blank", "", true);
+        })
         eventEmitter.once("ConfirmToRestart", ()=>{
             PreloadScene.audio.popUpSound.play();
             this.hideOne(this.confirmScreen);

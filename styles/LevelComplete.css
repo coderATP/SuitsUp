@@ -9,7 +9,7 @@ section#levelCompleteScreen{
     transform: translate(-50%, -50%);
     width: 95%;
     height: 50%;
-    display: grid;
+    display: none;
 }
 section#levelCompleteScreen div#message{
     position: absolute;

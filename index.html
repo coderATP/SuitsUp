@@ -8,11 +8,14 @@
     <title>ELÉWÉ-Ń-J'EWÉ</title>
     <link rel="stylesheet" href="style.css" type="text/css" media="all" />
     <link rel="stylesheet" href="styles/Menu.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="styles/Options.css" type="text/css" media="all" />
     <link rel="stylesheet" href="styles/TableSelection.css" type="text/css" media="all" />
     <link rel="stylesheet" href="styles/Play.css" type="text/css" media="all" />
     <link rel="stylesheet" href="styles/LevelComplete.css" type="text/css" media="all" />
     <link rel="stylesheet" href="styles/Pause.css" type="text/css" media="all" />
     <link rel="stylesheet" href="styles/Confirm.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="styles/Credits.css" type="text/css" media="all" />
+ 
 
 </head>
 
@@ -51,7 +54,7 @@
                 <button id="menu_continueBtn">CONTINUE</button>
                 <button id="menu_optionsBtn">OPTION</button>   
                 <button id="menu_leaderboardBtn">LEADERBOARD</button>
-                <button id="menu_tutorialBtn">TUTORIAL</button>   
+                <button id="menu_creditsBtn">CREDITS</button>   
                 <button id="menu_exitBtn">EXIT</button>   
             </div>
         </section>
@@ -156,6 +159,31 @@
                 <button id="levelComplete_menuBtn">Menu</button> 
                 <button id="levelComplete_newGameBtn">New Game</button>
             </div>
+        </section>
+        <!--OPTIONS SCREEN-->
+        <section id="optionsScreen">
+            <div id="sfx_div">
+                <p id="sfx_p">SFX: </p>
+                <input type="range" name="sfx" id="options_sfx" min = 0 max = 10>
+            </div>
+            <div id="vol_div">
+                <p id="vol_p"> VOLUME: </p>
+                <input type="range" name="music" id="options_music" min = 0 max = 10> 
+            </div>
+            <div id="go-to">
+                <button id= "options_menuBtn">BACK</button>
+            </div>
+
+        </section>
+        <!--CREDITS SCREEN-->
+        <section id="creditsScreen">
+            <div id="message">
+                <h1>CREDITS</h1>
+                <p id="credits">Programming: ATANDA Tosin Peter</p>
+            </div>
+            <div id="go-to">
+                <button id= "credits_menuBtn">BACK</button>
+            </div> 
         </section>
     </div>
     <script src="lib/phaser_v87/phaser.min.js"></script>

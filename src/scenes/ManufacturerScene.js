@@ -9,7 +9,7 @@ export class ManufacturerScene extends BaseScene{
     
     showInterface(){
         this.hideAllScreens();
-        this.showOne(this.manufacturerScreen, "grid", -1);
+        this.showOne(this.manufacturerScreen, "grid", 0);
     }
     preload(){
        // this.showInterface()

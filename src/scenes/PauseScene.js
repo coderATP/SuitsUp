@@ -48,10 +48,10 @@ export class PauseScene extends BaseScene{
             this.confirmText.innerText = "Return to Menu?" 
             eventEmitter.emit("PauseToConfirm");
         })
-        //RESTART
-        PlayScene.ui.pause_restartBtn.addEventListener('click', ()=>{
+        //OPTIONS
+        PlayScene.ui.pause_optionsBtn.addEventListener('click', ()=>{
            // this.confirmText.innerText = "Restart?"
-            //eventEmitter.emit("PauseToConfirm");
+            eventEmitter.emit("PauseToOptions");
         })
         
     }

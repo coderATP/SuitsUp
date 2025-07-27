@@ -9,19 +9,12 @@ export class AudioControl{
         this.menuSong.loop = true;
         
         this.buttonClickSound = scene.sound.add('buttonClickSound');
-        //this.beginGameSound = scene.sound.add('beginGameSound');
         this.drawSound = scene.sound.add('drawSound');
-        //this.dropSound = scene.sound.add('dropSound');
-        //this.errorSound = scene.sound.add('errorSound');
-        //this.undoSound = scene.sound.add('undoSound');
-        //this.shuffleSound = scene.sound.add('shuffleSound');
         this.clockTickSound = scene.sound.add('clockTickSound');
         this.popUpSound = scene.sound.add('popUpSound');
         this.songs = [this.menuSong, this.playSong];
-        this.sounds = [this.drawSound, this.popUpSound];
+        this.sounds = [this.drawSound, this.popUpSound, this.gameCompleteSound, this.playerWinSound, this.opponentWinSound, this.buttonClickSound, this.clockTickSound];
         //REDUCE VOLUME AT STARTUP, UNLESS OTHERWISE SPECIFIED BY USER
-        this.songs.forEach(song=>{song.volume = 1;});
-        this.sounds.forEach(sound=>{sound.volume = 1;});
         this.opponentWinSound.volume = 0.5;
         this.playSong.volume = 1;
         this.clockTickSound.volume = 0.3;
