@@ -23,20 +23,7 @@ div#playScreenTop{
     display: none;
     justify-content: center;
 }
-div#playScreenBottom{
-    width: 95%;
-    height: 12%;
-    box-shadow: 5px 5px 5px black;
-    border-radius: 3px;
-    position: absolute;
-    bottom: 2%;
-    left: 50%;
-    transform: translate(-50%);
-    background-color: rgba(0, 255, 0, 0.3);
-    overflow: auto;
-    display: none;
-    justify-content: center;
-}
+
 div#playScreenTop div#marketSection{
     position: absolute;
     height: 100%;
@@ -84,7 +71,7 @@ div#playScreenTop div#others p{
     position: absolute;
     bottom: 0;
     font-size: 0.75rem;
-    color: black;
+    color: white;
 }
 div#playScreenTop table{
     position: absolute;
@@ -106,4 +93,51 @@ div#playScreenTop p{
 }
 tr, th, td{
     font-family: myOtherFont;
+}
+
+
+div#playScreenBottom{
+    width: 95%;
+    height: 12%;
+    box-shadow: 5px 5px 5px black;
+    border-radius: 3px;
+    position: absolute;
+    bottom: 2%;
+    left: 50%;
+    transform: translate(-50%);
+    background-color: rgba(0, 255, 0, 0.3);
+    overflow: auto;
+    display: none;
+    justify-content: center;
+}
+div#playScreenBottom div#uiSection{
+    /*border: 2px solid white; */
+    width: 100%;
+    height: 30%;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+}
+div#playScreenBottom div#commentarySection {
+    /*border: 2px solid white; */
+    width: 100%;
+    height: 70%;
+    position: absolute;
+    top: 0;
+}
+div#playScreenBottom div#uiSection div#screenshot {
+    /*border: 2px solid white; */
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+}
+div#playScreenBottom div#uiSection div#screenshot a {
+  /*  border: 2px solid white; */
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    bottom: 35%;
+    text-align: center;
+    font-size: 2.0rem;
 }

@@ -32,7 +32,7 @@ export class PlayScene extends BaseScene{
         PreloadScene.audio.playSong.play();
     }
     createCard(type, x, y){
-        const card =  this.add.image(x,y,"cards").setName(type).setOrigin(0).setScale(this.config.zoomFactor);
+        const card =  this.add.image(x,y,"cards").setName(type).setOrigin(0).setScale(window.devicePixelRatio/2);
         return card
     }
     createPileRect(x, y, w, h){
@@ -102,24 +102,36 @@ export class PlayScene extends BaseScene{
                if(e.currentTarget.id === "pause"){
                     eventEmitter.emit("PlayToPause");
                 }
+               else if(e.currentTarget.id === "instructions"){
+                    eventEmitter.emit("PlayToTutorial");
+                } 
             })
         });
         this.processEvents();
         return this;
     }
     processEvents(){
-        const { GameCompleteScene, PauseScene } = this.game.scene.keys;
+        const { GameCompleteScene, PauseScene, TutorialScene } = this.game.scene.keys;
         PauseScene.gamePaused = false;
+        TutorialScene.tutorialMode = false;
         eventEmitter.on("PlayToPause", ()=>{
             //flags to avoid multiple event calling
             if(!PauseScene.gamePaused){
                 this.scene.pause();
                 this.preloadScene.audio.popUpSound.play();
                 this.scene.launch("PauseScene");
-                this.registry.set("gamePaused", true);
                 PauseScene.gamePaused = true;
             }
         })
+        eventEmitter.on("PlayToTutorial", ()=>{
+            //flags to avoid multiple event calling
+            if(!TutorialScene.tutorialMode){
+                this.scene.pause();
+                this.preloadScene.audio.popUpSound.play();
+                this.scene.launch("TutorialScene");
+                TutorialScene.tutorialMode = true;
+            }
+        }) 
         eventEmitter.on("GameComplete", ()=>{
             //PAUSE GAME
             if(!this.scene.isPaused("PlayScene")) this.scene.pause();

@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="styles/Pause.css" type="text/css" media="all" />
     <link rel="stylesheet" href="styles/Confirm.css" type="text/css" media="all" />
     <link rel="stylesheet" href="styles/Credits.css" type="text/css" media="all" />
- 
+    <link rel="stylesheet" href="styles/Tutorial.css" type="text/css" media="all" />
 
 </head>
 
@@ -25,9 +25,7 @@
         <section id="playScreen">
         </section>
             <div id="playScreenTop">
-                <div id="marketSection">
-                    
-                </div>
+                <div id="marketSection"> </div>
                 <div id="uiSection">
                     <div id="table">
                     </div>
@@ -47,7 +45,18 @@
                     </div> 
                 </div>
             </div>
-            <div id="playScreenBottom">  </div> 
+            <div id="playScreenBottom">
+                <div id="uiSection">
+                    <div id="screenshot">
+                        <a id = "canvasRef" href="#" download="image/png">⏬</a>
+                    </div>
+                </div>
+                <div id="commentarySection">
+                    <div id="message">
+                        
+                    </div>
+                </div>
+            </div> 
         <section id="menuScreen">
             <div id="button">
                 <button id="menu_playBtn">PLAY</button>
@@ -185,6 +194,59 @@
                 <button id= "credits_menuBtn">BACK</button>
             </div> 
         </section>
+        <!--TUTORIAL SCREEN-->
+        <section id="tutorialScreen">
+            <div id="message">
+                <div id="tutorial_1">
+                    <h3 id = "heading_1"> Overview</h3>
+                    <p id = "message_1"></p>
+                </div>
+                <div id="tutorial_2">
+                    <h3 id = "heading_2">Top</h3>
+                    <img id = "top" src = "images/top.png" alt = "top"/>
+                    <p id = "message_2"></p>
+                </div>
+                <div id="tutorial_3">
+                    <h3 id = "heading_3">Middle</h3>
+                    <img id = "middle" src = "images/middle.png" alt = "middle"/>
+                    <p id = "message_3"></p>
+                </div>
+                <div id="tutorial_4">
+                    <h3 id = "heading_4">Bottom</h3>
+                    <img id = "bottom" src = "images/bottom.png" alt = "bottom"/>
+                    <p id = "message_4"></p>
+                </div>
+                <div id="tutorial_5">
+                    <h3 id = "heading_5">Condition to win round</h3>
+                    <p id = "message_5"></p>
+                </div>
+                <div id="tutorial_6">
+                    <h3 id = "heading_6">When a participant has no card</h3>
+                    <p id = "message_6"></p>
+                </div>
+                <div id="tutorial_7">
+                    <h3 id = "heading_7">Scoring system</h3>
+                    <p id = "message_7"></p>
+                </div>
+                <div id="tutorial_8">
+                    <h3 id = "heading_8">Difficulty</h3>
+                    <p id = "message_8"></p>
+                </div>
+                <div id="tutorial_9">
+                    <h3 id = "heading_9">Game modes</h3>
+                    <p id = "message_9"></p>
+                </div>
+                <div id="tutorial_10">
+                    <p></p>
+                    <p></p>
+                    <h3 id = "heading_10">Final words</h3>
+                    <p id = "message_10"></p>
+                </div> 
+            </div>
+            <div id="go-to">
+                <button id= "tutorial_backBtn">BACK</button>
+            </div> 
+        </section> 
     </div>
     <script src="lib/phaser_v87/phaser.min.js"></script>
     <script type = "module" src="script.js">script.js</script>

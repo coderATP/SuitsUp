@@ -53,11 +53,11 @@ export class PreloadScene extends BaseScene{
             this.registry.inc("assetsTotal", 1);
         });
 
-        this.loadingText = this.add.text(0,0, "", { font: "16px myFont"})
+        this.loadingText = this.add.text(0,0, "", { font: "32px myFont"})
                 .setOrigin(0)
                 .setStyle({fill: 'white'})
         this.loadingText.setPosition(this.config.width/2 - this.loadingText.width/2, this.config.height/2 - this.loadingText.height/2);
-        this.loadingText2 = this.add.text(0,0, "Please wait", { font: "16px myFont"})
+        this.loadingText2 = this.add.text(0,0, "Please wait", { font: "32px myFont"})
                 .setOrigin(0)
                 .setStyle({fill: 'white'})
          

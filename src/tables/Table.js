@@ -54,7 +54,7 @@ export class Table{
     create(){
         //create market pile
         const marketSection = this.scene.ui.marketSection.getBoundingClientRect();
-        const marketMiddle = marketSection.x + marketSection.width/2;
+        const marketMiddle = (marketSection.x + marketSection.width/2) * window.devicePixelRatio;
         this.marketPile.create(
             marketMiddle - this.cardWidth/2,
             marketSection.y,
@@ -72,7 +72,7 @@ export class Table{
     
     addCardToPiles(participantsArray, market){
         const tempDeck = this.scene.elewenjewe.deck;
-        //market.container.add(tempDeck.splice(0, 3)); 
+        //market.container.add(tempDeck.splice(0, 2)); 
  
         for(let i = participantsArray.length; i > 0; --i){
             const pile = tempDeck.splice(0, 12);

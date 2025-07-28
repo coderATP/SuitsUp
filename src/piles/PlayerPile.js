@@ -17,7 +17,7 @@ export class PlayerPile{
        //container
        this.container = this.scene.add.container(x,y);
        //name
-       this.name = this.scene.add.text(0,0, this.id, { fontSize: "16px", fontFamily: "myOtherFont", color: "black"}).setOrigin(0)
+       this.name = this.scene.add.text(0,0, this.id, { fontSize: "32px", fontFamily: "myOtherFont", color: "gold"}).setOrigin(0)
        this.name.setPosition(x + w/2 -this.name.width/2, y+h);
        return this; 
     }

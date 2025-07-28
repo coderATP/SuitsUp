@@ -2,6 +2,7 @@
 export class UIEventsHandler{
     constructor(scene){
         this.scene = scene;
+        //play scene icons 
         this.undoIcon = document.getElementById("undo");
         this.redoIcon = document.getElementById("redo");
         this.instructionsIcon = document.getElementById("instructions");
@@ -19,16 +20,16 @@ export class UIEventsHandler{
         this.sfx_controller = document.getElementById("options_sfx");
         this.music_controller = document.getElementById("options_music");
         this.volume_controllers = [this.sfx_controller, this.music_controller]; 
-        //credits
+        //credits buttons 
         this.credits_menuBtn = document.getElementById("credits_menuBtn");
-        //pause
+        //pause buttons
         this.pause_resumeBtn = document.getElementById("pause_resumeBtn");
         this.pause_optionsBtn = document.getElementById("pause_optionsBtn");
         this.pause_tutorialBtn = document.getElementById("pause_tutorialBtn");
         this.pause_saveBtn = document.getElementById("pause_saveBtn");
         this.pause_menuBtn = document.getElementById("pause_menuBtn");
         this.pauseBtns = [this.pause_resumeBtn, this.pause_optionsBtn, this.pause_tutorialBtn, this.pause_saveBtn, this.pause_menuBtn];
-        //texts
+        //play
         this.undoText = document.getElementById("undoText");
         this.redoText = document.getElementById("redoText");
         this.instructionsText = document.getElementById("instructionsText");
@@ -39,6 +40,7 @@ export class UIEventsHandler{
         this.hintText = document.getElementById("hintText");
         this.movesText = document.getElementById("movesText");
         this.timeText = document.getElementById("timeText");
+        this.cameraIcon = document.getElementById("canvasRef");
         //win
         this.levelCompleteTotalScoreText = document.getElementById("winner");
         this.levelCompleteTotalMovesText = document.getElementById("total_rounds");
@@ -65,7 +67,20 @@ export class UIEventsHandler{
         this.tableSelectionBtns = [this.tableSelection_backBtn, this.tableSelection_submitBtn];
         //this.addClickSound();
         //confirm
-        this.confirmText = document.getElementById("confirmText"); 
+        this.confirmText = document.getElementById("confirmText");
+        //tutorial
+        this.tutorial_backBtn = document.getElementById("tutorial_backBtn");
+        this.tutorial_section1Paragraph = document.getElementById("message_1");
+        this.tutorial_section2Paragraph = document.getElementById("message_2");
+        this.tutorial_section3Paragraph = document.getElementById("message_3");
+        this.tutorial_section4Paragraph = document.getElementById("message_4");
+        this.tutorial_section5Paragraph = document.getElementById("message_5");
+        this.tutorial_section6Paragraph = document.getElementById("message_6");
+        this.tutorial_section7Paragraph = document.getElementById("message_7");
+        this.tutorial_section8Paragraph = document.getElementById("message_8");
+        this.tutorial_section9Paragraph = document.getElementById("message_9");
+        this.tutorial_section10Paragraph = document.getElementById("message_10");
+
     }
     
     changeID(element, newID){

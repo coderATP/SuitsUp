@@ -8,12 +8,12 @@ import { ConfirmScene } from "./src/scenes/ConfirmScene.js";
 import { GameCompleteScene } from "./src/scenes/GameCompleteScene.js";
 import { OptionsScene } from "./src/scenes/OptionsScene.js";
 import { CreditsScene } from "./src/scenes/CreditsScene.js";
+import { TutorialScene} from "./src/scenes/TutorialScene.js";
 
 
-const GAME_WIDTH = innerWidth;
-const GAME_HEIGHT = innerHeight;
-const ZOOM_FACTOR = 0.5
-
+const GAME_WIDTH = innerWidth * window.devicePixelRatio;
+const GAME_HEIGHT = innerHeight * window.devicePixelRatio;
+const ZOOM_FACTOR = 1;
 
 const SHARED_CONFIG = {
     width: GAME_WIDTH, 
@@ -35,7 +35,7 @@ const SHARED_CONFIG = {
 };
 
 const config= {
-    type: Phaser.AUTO,
+    type: Phaser.CANVAS,
     ...SHARED_CONFIG, 
     parent: "gameWrapper",
     backgroundColor: 0x005500,
@@ -65,7 +65,8 @@ const config= {
         new ConfirmScene(SHARED_CONFIG),
         new GameCompleteScene(SHARED_CONFIG),
         new OptionsScene(SHARED_CONFIG),
-        new CreditsScene(SHARED_CONFIG)
+        new CreditsScene(SHARED_CONFIG),
+        new TutorialScene(SHARED_CONFIG)
     ],
 };
 
