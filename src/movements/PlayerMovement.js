@@ -157,7 +157,7 @@ export class PlayerMovement extends Movement{
                 //WinnerMovement is called
                 //that is, winner plays three times consecutively hoping to win that round
                 //and bust the next player to deal whose pile is empty
-                const command = new WinnerMovement(this.scene, this.recentWinner.winnerPile, nextPileToDeal);
+                const command = new WinnerMovement(this.scene, this.recentWinner.winnerPile, nextPileToDeal, this.lastIndexToDeal, this.tempParticipants);
                 this.scene.commandHandler.execute(command);
             }
 

@@ -72,7 +72,7 @@ export class Table{
     
     addCardToPiles(participantsArray, market){
         const tempDeck = this.scene.elewenjewe.deck;
-        //market.container.add(tempDeck.splice(0, 2)); 
+        //market.container.add(tempDeck.splice(0, 4)); 
  
         for(let i = participantsArray.length; i > 0; --i){
             const pile = tempDeck.splice(0, 12);
