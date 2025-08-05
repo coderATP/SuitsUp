@@ -5,11 +5,10 @@ export class ConfirmScene extends BaseScene{
     constructor(config){
         super("ConfirmScene", config);
         this.config = config;
-
+        this.gamePaused = false;
     }
     
     showInterface(){
-        eventEmitter.destroy("MenuToExit");
         this.hideMultiple([this.pauseScreen, this.levelCompleteScreen, this.menuScreen]);
         this.showOne(this.confirmScreen, "grid", 0)
     }
@@ -33,7 +32,7 @@ export class ConfirmScene extends BaseScene{
                 break;
                 }
                 default:{
-                break;
+            //    break;
                 }
             }
         })
@@ -42,7 +41,7 @@ export class ConfirmScene extends BaseScene{
             else if(PlayScene.ui.confirmText.innerText === "Quit Game?") eventEmitter.emit("ConfirmToQuit");
             else if(PlayScene.ui.confirmText.innerText === "Restart?") eventEmitter.emit("ConfirmToRestart");
         }) 
-        eventEmitter.once("ConfirmToPause", ()=>{
+        eventEmitter.on("ConfirmToPause", ()=>{
             PreloadScene.audio.popUpSound.play();
             this.scene.start("PauseScene");
         })

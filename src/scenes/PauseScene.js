@@ -5,10 +5,11 @@ export class PauseScene extends BaseScene{
     constructor(config){
         super("PauseScene", config);
         this.config = config;
-        this.gamePaused = null; //flag
+        this.gamePaused = false; //flag
     }
     
     showInterface(){
+      //  this.hideAllScreens();
         this.hideOne(this.confirmScreen);
         this.showOne(this.pauseScreen, "grid", 0);
     }

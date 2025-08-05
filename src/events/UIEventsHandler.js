@@ -14,7 +14,7 @@ export class UIEventsHandler{
         this.movesIcon = document.getElementById("moves");
         this.timeIcon = document.getElementById("time");
         this.marketSection = document.getElementById("marketSection");
-        this.playSceneIcons = [this.instructionsIcon, this.pauseIcon];
+        this.playSceneIcons = [this.instructionsIcon, this.pauseIcon, this.timeIcon];
         //options
         this.options_menuBtn = document.getElementById("options_menuBtn");
         this.sfx_controller = document.getElementById("options_sfx");

@@ -17,7 +17,8 @@ export class AudioControl{
         //REDUCE VOLUME AT STARTUP, UNLESS OTHERWISE SPECIFIED BY USER
         this.opponentWinSound.volume = 0.5;
         this.playSong.volume = 1;
-        this.clockTickSound.volume = 0.3;
+        this.clockTickSound.volume = 0.2;
+        this.buttonClickSound.volume = 0.2;
     }
     
     play(audio){

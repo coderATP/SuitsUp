@@ -11,6 +11,7 @@ export class Time{
         this.secText = undefined;
         this.minText = undefined;
         this.paused = true;
+        this.canPlayTickSound = true;
     }
     startWatch(renderer){
         this.sec+=1;
@@ -27,14 +28,14 @@ export class Time{
     setUpWatch(renderer){
         this.createTimeVariables();
         this.stopwatch = setInterval(()=>{
-            this.preloadScene.audio.clockTickSound.play();
+            if(this.canPlayTickSound) this.preloadScene.audio.clockTickSound.play();
             this.startWatch(renderer);
         }, 1000);
         return this;
     }
     resumeWatch(renderer){
         this.stopwatch = setInterval(()=>{
-            this.preloadScene.audio.clockTickSound.play();
+            if(this.canPlayTickSound) this.preloadScene.audio.clockTickSound.play();
             this.startWatch(renderer);
         }, 1000);
     }

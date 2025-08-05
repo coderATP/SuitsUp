@@ -102,9 +102,12 @@ export class PlayScene extends BaseScene{
                if(e.currentTarget.id === "pause"){
                     eventEmitter.emit("PlayToPause");
                 }
-               else if(e.currentTarget.id === "instructions"){
+                else if(e.currentTarget.id === "instructions"){
                     eventEmitter.emit("PlayToTutorial");
                 } 
+                else if(e.currentTarget.id === "time"){
+                    eventEmitter.emit("ToggleClockTick");
+                }  
             })
         });
         this.processEvents();
@@ -116,8 +119,8 @@ export class PlayScene extends BaseScene{
         TutorialScene.tutorialMode = false;
         eventEmitter.on("PlayToPause", ()=>{
             //flags to avoid multiple event calling
-            if(!PauseScene.gamePaused){
-                this.scene.pause();
+            if(!this.scene.isPaused("PlayScene")){
+                if(!PauseScene.gamePaused) this.scene.pause();
                 this.preloadScene.audio.popUpSound.play();
                 this.scene.launch("PauseScene");
                 PauseScene.gamePaused = true;
@@ -139,7 +142,10 @@ export class PlayScene extends BaseScene{
             this.preloadScene.audio.popUpSound.play();
             this.preloadScene.audio.playSong.stop();
             GameCompleteScene.gamePaused = true;
-        })
+        });
+        eventEmitter.on("ToggleClockTick", ()=>{
+            this.watch.canPlayTickSound = !this.watch.canPlayTickSound;
+        }); 
     }
      
     shuffle(array){
