@@ -11,8 +11,8 @@ import { CreditsScene } from "./src/scenes/CreditsScene.js";
 import { TutorialScene} from "./src/scenes/TutorialScene.js";
 
 
-const GAME_WIDTH = innerWidth * window.devicePixelRatio;
-const GAME_HEIGHT = innerHeight * window.devicePixelRatio;
+const GAME_WIDTH = screen.width * window.devicePixelRatio;
+const GAME_HEIGHT = screen.height * window.devicePixelRatio;
 const ZOOM_FACTOR = 1;
 
 const SHARED_CONFIG = {
@@ -43,6 +43,7 @@ const config= {
     scale: {
          mode: Phaser.Scale.Fit,
          autoCenter: Phaser.Scale.CENTER_BOTH,
+         orientation: Phaser.Scale.Orientation.PORTRAIT
     },
     pixelArt: false, 
     physics:{
